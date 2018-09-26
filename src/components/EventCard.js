@@ -18,6 +18,7 @@ const styles = {
     marginRight: '2vw',
     minWidth: 400,
     maxWidth: 400,
+    height: 200,
     // flexDirection: 'column',
     marginBottom: '2vh',
     marginTop: '2vh',

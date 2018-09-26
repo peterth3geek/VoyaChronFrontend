@@ -46,6 +46,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     height: '93.3vh',
+    overflow: 'scroll',
   },
   toolbar: theme.mixins.toolbar,
 });
@@ -119,17 +120,17 @@ if(formData !== '') {
 
       return  (
         <div id={`character-${character.id}`} key={character.name} style={flexContainer}>
-        <Card style={{backgroundColor: '#616161', height: 200}}>
-          <CardContent>
-            <Typography className={classes.title} color="textSecondary">
-              <Button size='small'>{character.name}</Button>
-            </Typography>
-          </CardContent>
+        <Card style={{backgroundColor: '#616161', height: 150}}>
+          {/* <CardContent> */}
+            {/* <Typography style={{paddingLeft: '0.5vw', paddingTop: '0.5vh'}} className={classes.title} color="textSecondary"> */}
+              <Button style={{paddingLeft: '0.5vw', paddingTop: '0.5vh', width: '30vw'}} size='small'>{character.name}</Button>
+            {/* </Typography> */}
 
-          <CardActions>
-            <form id={`character-event-${character.id}`} data-tag={character.id} onSubmit={this.submitEvent}>
+
+          {/* <CardActions > */}
+            <form id={`character-event-${character.id}`} style={{padding: '0.5vw'}} data-tag={character.id} onSubmit={this.submitEvent}>
               <TextField
-                style={{width: '25vw'}}
+                style={{width: '28vw'}}
                 onKeyPress={this.handleEnter}
                 label={`${character.name}'s Event`}
                 placeholder={`What did ${character.name} do?`}
@@ -138,11 +139,12 @@ if(formData !== '') {
                 name={'textData'}
                 multiline
                 margin='dense'
-                width='15vw'
+                // width='15vw'
                 onChange={this.eventText}/>
-              <Button style={{width: '25vw'}} type='submit' size='small' color='primary'>Submit</Button>
+              <Button style={{width: '28vw'}} type='submit' size='small'>Submit</Button>
             </form>
-          </CardActions>
+          {/* </CardActions>
+          </CardContent> */}
         </Card>
       </div>
       )

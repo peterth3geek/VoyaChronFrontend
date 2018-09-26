@@ -9,7 +9,7 @@ export const fetchUser = () => {
 }
 
 export const fetchCampaign = () => {
-  return fetch('http://localhost:3000/campaigns/2')
+  return fetch('http://localhost:3000/campaigns/1')
   .then(r=>r.json())
 }
 

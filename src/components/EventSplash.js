@@ -17,7 +17,7 @@ import EventCard from './EventCard'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '93.3vh',
+    height: '85vh',
     width: '70vw',
     zIndex: 1,
     overflow: 'auto',
@@ -124,6 +124,7 @@ class EventSplash extends React.Component{
 
     return (
       <div className={classes.root}>
+        {/* <h1>{this.}</h1> */}
         <div className={classes.cardDiv}>
             {this.mapEvents()}
         </div>
@@ -158,7 +159,7 @@ const mapStateToProps = (state) => {
     currentUser: state.initReducer.currentUser,
     eventTheme: state.campaignReducer.eventTheme,
     characterTheme: state.campaignReducer.eventTheme,
-    eventArray: state.campaignReducer.campaignEvents
+    eventArray: state.campaignReducer.campaignEvents,
   }
 }
 

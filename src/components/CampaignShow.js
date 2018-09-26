@@ -9,6 +9,8 @@ import { loadCampaign } from '../actions'
 import compose from 'recompose/compose'
 import { withTheme } from '@material-ui/core/styles';
 
+import Typography from '@material-ui/core/Typography';
+
 import EventSplash from './EventSplash'
 import PlayerDrawer from './PlayerDrawer'
 
@@ -21,6 +23,8 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
   },
+  campaignTitle: {
+  }
 })
 
 
@@ -33,6 +37,10 @@ class CampaignShow extends React.Component{
       return (
         <div className={this.props.classes.root}>
           <div flexDirection='column'>
+            <Typography align='center'>
+              <h1 className={this.props.classes.campaignTitle}>{this.props.currentCampaign.title}</h1>
+            </Typography>
+
             <EventSplash campaign={this.props.currentCampaign}/>
           </div>
           <div>
