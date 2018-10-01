@@ -8,16 +8,34 @@ import { withStyles } from '@material-ui/core/styles';
 import CharacterCard from './CharacterCard'
 import NoDataCard from './NoDataCard'
 
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-    marginLeft: '2vw',
-    marginRight: '2vw',
-    marginBottom: '2vh',
-    backgroundColor: 'inherit'
+    width: '50vw',
+    height: '55vh',
+    overflow: 'auto',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '2vh',
+    backgroundColor: 'inherit',
+    },
+  grid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridTile: {
+    minWidth: 400,
+    maxWidth: '30vw',
+    height: 350,
   },
   title: {
     marginBottom: 16,
@@ -34,10 +52,14 @@ class CharactersContainer extends React.Component{
     loading: true
   }
 
-  mountCharacters = () => {
+  mountCharacters = (style) => {
     if(this.props.characters.length > 0){
       return  this.props.characters.map(character => {
-          return <CharacterCard key={character.id} character={character} campaign={character.campaign} />
+          return (
+            <GridListTile style={{height: 375}} className={style}>
+              <CharacterCard key={character.id} character={character} campaign={character.campaign} />
+            </GridListTile>
+          )
         })
     } else {
       return <NoDataCard type='Character'/>
@@ -52,24 +74,23 @@ class CharactersContainer extends React.Component{
     const { classes } = this.props;
 
     const flexContainer = {
-      display: 'flex',
-      flexDirection: 'row',
       padding: '0.5vw',
-      overflow: 'scroll'
+      overflow: 'scroll',
+      alignItems: 'center',
     }
 
     return (
-      <div>
-        <Card className={classes.card}>
-          <div>
-          <Typography variant='headline' component='h1'>
+      <div className={classes.card}>
+        <div>
+          <Typography variant='display2' component='h1'>
             Characters:
           </Typography>
         </div>
-        <CardContent style={flexContainer}>
-            {this.mountCharacters()}
-          </CardContent>
-        </Card>
+        <div style={flexContainer}>
+          <GridList className={classes.grid} cols={2}>
+            {this.mountCharacters(classes.gridTile)}
+          </GridList>
+        </div>
       </div>
     )
   }

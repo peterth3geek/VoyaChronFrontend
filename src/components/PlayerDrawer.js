@@ -22,6 +22,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
 
 const styles = theme => ({
   root: {
@@ -85,12 +87,15 @@ class PlayerDrawer extends React.Component {
   }
 
   submitEvent = (e) => {
+    e.preventDefault()
+    // console.log('e.target =', e.target)
     const formID = e.target.id
     const formData = e.target.textData.value
-    const characterID = e.target.dataSet.tag
-    e.preventDefault()
+    // const characterID = formID.split('-').pop()
+    const characterID = e.target.dataset.tag
+    // console.log('characterID = ', characterID)
 
-    console.log(e.target.dataset)
+    // console.log('e.target.dataset', e.target.dataset.tag)
 if(formData !== '') {
     const event ={
       character_id: characterID,
@@ -112,6 +117,7 @@ if(formData !== '') {
       padding: '0.5vw',
       width: '30vw',
       height: '25vh',
+      marginTop: '1vh',
       flexDirection: 'column',
     }
 
@@ -123,28 +129,40 @@ if(formData !== '') {
         <Card style={{backgroundColor: '#616161', height: 150}}>
           {/* <CardContent> */}
             {/* <Typography style={{paddingLeft: '0.5vw', paddingTop: '0.5vh'}} className={classes.title} color="textSecondary"> */}
-              <Button style={{paddingLeft: '0.5vw', paddingTop: '0.5vh', width: '30vw'}} size='small'>{character.name}</Button>
+              {/* <Button style={{paddingLeft: '0.5vw', paddingTop: '0.5vh', width: '30vw'}} size='small'>{character.name}</Button> */}
             {/* </Typography> */}
 
 
-          {/* <CardActions > */}
+          <CardActions disableActionSpacing>
             <form id={`character-event-${character.id}`} style={{padding: '0.5vw'}} data-tag={character.id} onSubmit={this.submitEvent}>
               <TextField
-                style={{width: '28vw'}}
+                style={{width: '26.5vw'}}
                 onKeyPress={this.handleEnter}
-                label={`${character.name}'s Event`}
+                label={`${character.name}`}
                 placeholder={`What did ${character.name} do?`}
                 value={this.state[`character-event-${character.id}`]}
                 id={`character-event-${character.id}`}
                 name={'textData'}
                 multiline
                 margin='dense'
+                InputProps={{
+              endAdornment: (
+                <InputAdornment disableTypography position="end">
+                  <Typography variant='caption'>
+                    <Button color='primary'>
+                      Submit
+                    </Button>
+                  </Typography>
+                </InputAdornment>
+              ),
+            }}
+                // maxRows='4'
                 // width='15vw'
                 onChange={this.eventText}/>
-              <Button style={{width: '28vw'}} type='submit' size='small'>Submit</Button>
+              {/* <Button style={{width: '26.5vw'}} type='submit' size='small'>Submit</Button> */}
             </form>
-          {/* </CardActions>
-          </CardContent> */}
+          </CardActions>
+          {/* </CardContent> */}
         </Card>
       </div>
       )

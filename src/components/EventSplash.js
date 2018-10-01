@@ -17,7 +17,7 @@ import EventCard from './EventCard'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '85vh',
+    height: '78vh',
     width: '70vw',
     zIndex: 1,
     overflow: 'auto',
@@ -81,7 +81,7 @@ class EventSplash extends React.Component{
     const characterID = e.target.dataset.tag
     e.preventDefault()
 
-    console.log('splash', formData)
+    // console.log('splash', formData)
 
   if(formData !== '') {
       const event ={
@@ -93,17 +93,6 @@ class EventSplash extends React.Component{
       this.props.createEvent(event)
     }
 
-  }
-
-  mapChapters = () => {
-    const { chapters } = this.props.campaign
-    return chapters.map(chapter => {
-      return(
-        <div key={chapter.id}>
-          {chapter.title}
-        </div>
-      )
-    })
   }
 
   mapEvents = () => {
@@ -136,7 +125,8 @@ class EventSplash extends React.Component{
             className={classes.textField}
             onKeyDown={this.eventEnter}
             onChange={this.eventText}
-            style={{width: 400}}
+            style={{minWidth: 400,
+                maxWidth: '30vw',}}
             multiline
             InputProps={{
           endAdornment: (
@@ -165,4 +155,5 @@ const mapStateToProps = (state) => {
 
 export default withRouter(compose(
   connect(mapStateToProps, { createEvent }),
-  withTheme(), withStyles(styles))(EventSplash))
+  withTheme(),
+  withStyles(styles))(EventSplash))

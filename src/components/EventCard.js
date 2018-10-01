@@ -14,15 +14,18 @@ import Button from '@material-ui/core/Button';
 
 const styles = {
   card: {
-    marginLeft: '2vw',
-    marginRight: '2vw',
+    margin: '1vw',
     minWidth: 400,
-    maxWidth: 400,
+    maxWidth: '30vw',
     height: 200,
+    // align: 'center',
     // flexDirection: 'column',
     marginBottom: '2vh',
     marginTop: '2vh',
     backgroundColor: '#616161',
+  },
+  actionClass: {
+    width: '100%',
   },
   title: {
     marginBottom: 16,
@@ -31,6 +34,9 @@ const styles = {
   },
   pos: {
     marginBottom: 12,
+    height: 75,
+    overflow: 'hidden',
+    align: 'center'
   },
 };
 
@@ -46,11 +52,11 @@ class EventCard extends React.Component{
     const { classes } = this.props;
     const { character } = this.props;
     const { event } = this.props;
-    console.log(character)
+    // console.log(character)
   return  (
     <div>
       <Card className={classes.card}>
-      <CardActionArea onClick={this.eventClick}>
+      <CardActionArea className={classes.actionClass} onClick={this.eventClick}>
           <CardContent >
             <Typography className={classes.title} color="textSecondary">
               { !!character ?

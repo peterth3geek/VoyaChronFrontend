@@ -3,6 +3,8 @@ import {characterTheme, campaignTheme, eventTheme} from '../adapters'
 const initialState = {
   loading: true,
   currentUser: {},
+  currentChapter: {},
+  currentCampaign: {},
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],

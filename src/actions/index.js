@@ -8,10 +8,20 @@ export const loadUser = () => {
   }
 }
 
-export const loadCampaign = () => {
+export const loadChapter = (chapterID) => {
+  return dispatch => {
+    Adapters.fetchChapter(chapterID).then(chapter =>{
+      dispatch(setChapter(chapter))
+    }
+    )
+  }
+}
+
+
+export const loadCampaign = (campaignID) => {
   // console.log('in load')
   return dispatch => {
-    Adapters.fetchCampaign()
+    Adapters.fetchCampaign(campaignID)
     .then(campaign => {
       dispatch(setCampaign(campaign))
     })
@@ -43,11 +53,25 @@ export const prepLoadCampaign = () => {
 }
 
 const setCampaign = (campaign) => {
-  // console.log('in set', campaign)
-  return {
+  return dispatch => {
+    // console.log('REDUCING', campaign)
+  const action = {
     type: 'LOAD_CAMPAIGN',
     payload: {
       campaign
+    }
+  }
+
+  return dispatch(action)
+}
+}
+
+export const setChapter = (chapter) => {
+  console.log('Reducing', chapter)
+  return {
+    type: 'LOAD_CHAPTER',
+    payload: {
+      chapter
     }
   }
 }

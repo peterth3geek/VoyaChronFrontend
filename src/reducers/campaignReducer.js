@@ -3,6 +3,7 @@ import {characterTheme, campaignTheme, eventTheme} from '../adapters'
 const initialState = {
   loading: true,
   currentUser: {},
+  currentChapter: {story_modules: []},
   currentCampaign: {characters: [], chapters: []},
   campaignEvents: [],
   userCampaigns: [],
@@ -42,6 +43,13 @@ const campaignReducer = (state = initialState, action) => {
     return {
       ...state,
       campaignEvents: [...state.campaignEvents, action.payload.event]
+    }
+
+    case 'LOAD_CHAPTER':
+    console.log('chapter reducing', action.payload)
+    return {
+      ...state,
+      currentChapter: action.payload.chapter
     }
 
     default:

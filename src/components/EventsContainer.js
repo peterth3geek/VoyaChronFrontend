@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 import EventListItem from './EventListItem'
+import EventCard from './EventCard'
 
 import Typography from '@material-ui/core/Typography';
 
@@ -21,8 +22,7 @@ const styles = {
     overflow: 'scroll',
   },
   headline: {
-    marginLeft: '2vw',
-    marginRight: '2vw',
+    margin: '1vw',
   }
 };
 
@@ -36,7 +36,8 @@ class EventsContainer extends React.Component{
       return  this.props.characters.map(character => {
         if(character.events.length > 0){
           return character.events.map(event => {
-          return  <EventListItem key={event.id} character={character} event={event}/>
+          // return  <EventListItem key={event.id} character={character} event={event}/>
+          return  <EventCard key={event.id} character={character} event={event}/>
       })
     }
   })
@@ -60,7 +61,7 @@ class EventsContainer extends React.Component{
     return (
       <div>
         <div className={classes.headline}>
-          <Typography align='left' variant='headline' component='h1'>
+          <Typography align='center' variant='display2'>
             Events:
           </Typography>
         </div>

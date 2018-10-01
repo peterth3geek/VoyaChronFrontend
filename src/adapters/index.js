@@ -4,12 +4,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // #ddc700
 
 export const fetchUser = () => {
-  return fetch('http://localhost:3000/users/1')
+  return fetch('http://localhost:3000/users/3')
   .then(r=>r.json())
 }
 
-export const fetchCampaign = () => {
-  return fetch('http://localhost:3000/campaigns/1')
+export const fetchCampaign = (campaignID) => {
+  return fetch(`http://localhost:3000/campaigns/${campaignID}`)
   .then(r=>r.json())
 }
 
@@ -22,6 +22,12 @@ export const eventPostFetch = (event) => {
     body: JSON.stringify(event)
   }
 ).then(r=>r.json())
+}
+
+export const fetchChapter = (chapterID) => {
+  console.log('fetch', chapterID)
+  return fetch(`http://localhost:3000/chapters/${chapterID}`)
+  .then(r=>r.json())
 }
 
 export const characterTheme = createMuiTheme({
