@@ -36,6 +36,12 @@ class ChapterSplash extends React.Component{
   render () {
     return (
       <div>
+        <div style={{backgroundColor: '#424242', padding: '1vh'}}>
+          <Typography align='center' variant='display3'>{this.props.currentCampaign.title}</Typography>
+          <Typography align='center' paragraph>
+            {this.props.currentCampaign.description}
+          </Typography>
+        </div>
       <div>
         <Typography align='center' variant='display3'>
           Chapters:

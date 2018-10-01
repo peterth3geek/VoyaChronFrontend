@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 const styles = {
   card: {
     margin:'2vw',
-    minWidth: 400,
+    minWidth: 370,
     maxWidth: '30vw',
     height: 325,
     backgroundColor: '#616161',

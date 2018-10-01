@@ -8,9 +8,9 @@ const initialState = {
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],
-  characterTheme: characterTheme,
-  campaignTheme: campaignTheme,
-  eventTheme: eventTheme
+  // characterTheme: characterTheme,
+  // campaignTheme: campaignTheme,
+  // eventTheme: eventTheme
 }
 
 const eventReducer = (state = initialState, action) => {

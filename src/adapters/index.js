@@ -30,38 +30,38 @@ export const fetchChapter = (chapterID) => {
   .then(r=>r.json())
 }
 
-export const characterTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {main: '#0097A7'},
-    secondary: {main: '#700297'}
-  },
-  status: {
-    danger: '#ddc700',
-    error: '#bc0042'
-  }
-})
-
-export const campaignTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {main: '#c43e00'},
-    secondary: {main: '#5ddef4'}
-  },
-  status: {
-    danger: '#ddc700',
-    error: '#bc0042'
-  }
-})
-
-export const eventTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {main: '#5ddef4'},
-    secondary: {main: '#e5db00'}
-  },
-  status: {
-    danger: '#ddc700',
-    error: '#bc0042'
-  }
-})
+// export const characterTheme = createMuiTheme({
+//   palette: {
+//     type: 'dark',
+//     primary: {main: '#0097A7'},
+//     secondary: {main: '#700297'}
+//   },
+//   status: {
+//     danger: '#ddc700',
+//     error: '#bc0042'
+//   }
+// })
+//
+// export const campaignTheme = createMuiTheme({
+//   palette: {
+//     type: 'dark',
+//     primary: {main: '#c43e00'},
+//     secondary: {main: '#5ddef4'}
+//   },
+//   status: {
+//     danger: '#ddc700',
+//     error: '#bc0042'
+//   }
+// })
+//
+// export const eventTheme = createMuiTheme({
+//   palette: {
+//     type: 'dark',
+//     primary: {main: '#5ddef4'},
+//     secondary: {main: '#e5db00'}
+//   },
+//   status: {
+//     danger: '#ddc700',
+//     error: '#bc0042'
+//   }
+// })

@@ -65,9 +65,17 @@ class ChapterCard extends React.Component{
     const { chapter } = this.props;
     const { campaign } = this.props;
 
-    console.log(chapter)
+    // console.log(chapter)
     this.props.setChapter(chapter)
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}`)
+  }
+
+  sessionZoom = (storyID) => {
+    const { chapter } = this.props;
+    const { campaign } = this.props;
+
+    this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${storyID}`)
+
   }
 
   renderCard = () => {
@@ -77,7 +85,7 @@ class ChapterCard extends React.Component{
     <div>
       <Card className={classes.card}>
       <CardActionArea onClick={this.chapterClick} style={{backgroundColor: 'primary'}}>
-        <CardHeader title={chapter.title} titleTypographyProps={{variant: 'display1', backgroundColor: 'primary'}} subheader='Dungeons and Dragons 5e (Non-Fetched)' />
+        <CardHeader title={chapter.title} titleTypographyProps={{variant: 'display1', backgroundColor: 'primary', color: 'textPrimary'}}/>
           <CardContent >
             <Typography className={classes.pos} component="p">
               {chapter.description}
@@ -97,7 +105,7 @@ class ChapterCard extends React.Component{
               return(
                 // <GridListTile>
                   // {/* <Button width={75} height={75}> */}
-                  <ListItem button>
+                  <ListItem button onClick={() => this.sessionZoom(story.id)}>
                     <ListItemText
                       primary={story.title} >
                     </ListItemText>

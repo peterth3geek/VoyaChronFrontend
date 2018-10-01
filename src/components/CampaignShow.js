@@ -56,19 +56,6 @@ class CampaignShow extends React.Component{
       return (
         <div className={this.props.classes.root}>
           <div>
-            <div style={{backgroundColor: '#424242', padding: '1vh'}}>
-              <Typography align='center' variant='display3'>{this.props.currentCampaign.title}</Typography>
-              <Typography align='center' paragraph>
-                {this.props.currentCampaign.description}
-              </Typography>
-              {/* <Stepper nonLinear activeStep={this.state.activeStep}>
-                <Step>
-                  <StepLabel>
-                    one
-                  </StepLabel>
-                </Step>
-              </Stepper> */}
-            </div>
             <Switch>
               <Route exact path='/campaign/:campaign' render={() => <CampaignSplash campaign={campaign}/>} />
               <Route exact path='/campaign/:campaign/:chapter' render={() => <ChapterSplash chapter={{story_modules: []}} campaign={campaign} />}/>

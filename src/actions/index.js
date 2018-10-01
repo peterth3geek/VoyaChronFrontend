@@ -67,7 +67,7 @@ const setCampaign = (campaign) => {
 }
 
 export const setChapter = (chapter) => {
-  console.log('Reducing', chapter)
+  // console.log('Reducing', chapter)
   return {
     type: 'LOAD_CHAPTER',
     payload: {

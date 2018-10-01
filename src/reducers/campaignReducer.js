@@ -9,9 +9,9 @@ const initialState = {
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],
-  characterTheme: characterTheme,
-  campaignTheme: campaignTheme,
-  eventTheme: eventTheme
+  // characterTheme: characterTheme,
+  // campaignTheme: campaignTheme,
+  // eventTheme: eventTheme
 }
 
 const campaignReducer = (state = initialState, action) => {
@@ -39,14 +39,14 @@ const campaignReducer = (state = initialState, action) => {
     }
 
     case 'EVENT_POST_FETCH':
-    console.log('in campaignReducer action', action.payload)
+    // console.log('in campaignReducer action', action.payload)
     return {
       ...state,
       campaignEvents: [...state.campaignEvents, action.payload.event]
     }
 
     case 'LOAD_CHAPTER':
-    console.log('chapter reducing', action.payload)
+    // console.log('chapter reducing', action.payload)
     return {
       ...state,
       currentChapter: action.payload.chapter

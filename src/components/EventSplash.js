@@ -9,9 +9,11 @@ import { withTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 import { createEvent } from '../actions'
 
-
+import EventTextField from './EventTextField'
 import EventCard from './EventCard'
 
 const styles = theme => ({
@@ -32,61 +34,26 @@ const styles = theme => ({
     // position: 'fixed',
     // bottom: 0
   },
-  textField: {
-  marginLeft: theme.spacing.unit,
-  marginRight: theme.spacing.unit,
-},
 });
 
 class EventSplash extends React.Component{
 
   state = {
-    description: ''
+    description: '',
   }
 
-  eventEnter = (e) => {
-    // e.preventDefault()
-    const eventKey = e.key
-    const formData = this.state.description
-
-    if(eventKey === 'Enter'){
-      e.preventDefault()
-      const event ={
-        character_id: 1,
-        story_module_id: 1,
-        description: formData
-      }
-      this.props.createEvent(event)
-      this.setState({
-        description: ''
-      })
-    } else {
-      // console.log(e.key)
-    }
-
-
-  }
-
-  eventText = (e) => {
-    e.preventDefault()
-
-    const description = e.target.value
-
-    this.setState({description: description})
-  }
 
   submitEvent = (e) => {
     // const formID = e.target.id
     const formData = e.target.textData.value
     const characterID = e.target.dataset.tag
+    const { session } = this.props.match.params
     e.preventDefault()
-
-    // console.log('splash', formData)
 
   if(formData !== '') {
       const event ={
         character_id: characterID,
-        story_module_id: 1,
+        story_module_id: session,
         description: formData
       }
 
@@ -104,52 +71,58 @@ class EventSplash extends React.Component{
 
     return newArr.map(event =>{
       // console.log(event)
-    return  <EventCard key={event.id} character={event.character} event={event}/>
+      const sessionID = this.props.match.params.session
+      const { chapter } = this.props
+      // console.log('eventMap', event.session, sessionID)
+      if(event.session == undefined){
+
+      } else if (event.session.id == sessionID){
+        return  <EventCard key={event.id} session={event.session} chapter={chapter} character={event.character} event={event}/>
+      }
     })
+  }
+
+  componentDidMount(){
+    // console.log('did mount', this.props.match.params.slug)
+    const sessionID = this.props.match.params.session
+    // this.props.loadCampaign(campaignID)
   }
 
   render () {
     const { classes } = this.props;
+    const { chapter } = this.props
+    const { campaign } = this.props
 
     return (
-      <div className={classes.root}>
-        {/* <h1>{this.}</h1> */}
+      <div>
+        <div style={{backgroundColor: '#424242', padding: '1vh'}}>
+          <Typography align='center' variant='display2'>{this.props.campaign.title}</Typography>
+          <Typography align='center' variant='display1'>{this.props.chapter.title}</Typography>
+          <Typography align='center' paragraph>
+            {this.props.chapter.description}
+          </Typography>
+        </div>
+        <div  className={classes.root}>
         <div className={classes.cardDiv}>
             {this.mapEvents()}
         </div>
         <div>
-          <TextField
-            value={this.state.description}
-            placeholder='Enter your events here...'
-            label='Event Text'
-            className={classes.textField}
-            onKeyDown={this.eventEnter}
-            onChange={this.eventText}
-            style={{minWidth: 400,
-                maxWidth: '30vw',}}
-            multiline
-            InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button color='primary'>Create</Button>
-            </InputAdornment>
-          ),
-        }}
-            margin='dense'
-            width='50vw'/>
+          <EventTextField sessionID={this.props.match.params.session}/>
         </div>
+      </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  // console.log('in map state to props', state)
+
   return{
     currentUser: state.initReducer.currentUser,
     eventTheme: state.campaignReducer.eventTheme,
     characterTheme: state.campaignReducer.eventTheme,
     eventArray: state.campaignReducer.campaignEvents,
+    chapter: state.campaignReducer.currentChapter
   }
 }
 

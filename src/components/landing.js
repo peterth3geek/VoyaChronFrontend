@@ -46,7 +46,7 @@ class Landing extends React.Component{
 const mapStateToProps = (state) => {
   return{
     currentUser: state.initReducer.currentUser,
-    campaignTheme: state.campaignTheme
+    // campaignTheme: state.campaignTheme
   }
 }
 

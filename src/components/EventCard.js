@@ -1,5 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,6 +10,8 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
+
+import { setChapter } from '../actions'
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -44,8 +48,13 @@ class EventCard extends React.Component{
 
 
   eventClick = (e) => {
-    const { event } = this.props;
-    this.props.history.push(`/events/${event.id}`)
+    // const { event } = this.props;
+    const { session } = this.props
+    const chapter = this.props.session.chapter
+    const campaign = chapter.campaign
+    this.props.setChapter(chapter)
+    console.log('chapter', chapter, 'session', session, 'campaign', campaign)
+    this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${session.id}`)
   }
 
   renderCard = () => {
@@ -92,9 +101,17 @@ class EventCard extends React.Component{
 }
 
 
+const mapStateToProps = (state) => {
+  return{
+    campaign: state.campaignReducer.currentCampaign
+  }
+}
+
 
 EventCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(EventCard));
+export default withRouter(
+  compose(withStyles(styles),
+connect(mapStateToProps, { setChapter }))(EventCard));

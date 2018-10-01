@@ -37,7 +37,7 @@ class EventsContainer extends React.Component{
         if(character.events.length > 0){
           return character.events.map(event => {
           // return  <EventListItem key={event.id} character={character} event={event}/>
-          return  <EventCard key={event.id} character={character} event={event}/>
+          return  <EventCard key={event.id} session={event.session} character={character} event={event}/>
       })
     }
   })

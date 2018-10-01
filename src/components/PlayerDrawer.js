@@ -65,15 +65,15 @@ class PlayerDrawer extends React.Component {
       e.preventDefault()
 
       console.log('Enter', e.target, formData)
-      // const event ={
-      //   character_id: 1,
-      //   story_module_id: 1,
-      //   description: formData
-      // }
-      // this.props.createEvent(event)
-      // this.setState({
-      //   description: ''
-      // })
+      const event ={
+        character_id: 1,
+        story_module_id: 1,
+        description: formData
+      }
+      this.props.createEvent(event)
+      this.setState({
+        description: ''
+      })
     }
   }
 

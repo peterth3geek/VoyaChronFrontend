@@ -67,7 +67,7 @@ class SessionCard extends React.Component{
     <div>
       <Card className={classes.card}>
         <CardActionArea onClick={this.sessionClick}>
-        <CardHeader title={session.title} subheader='Dungeons and Dragons 5e (Non-Fetched)' />
+        <CardHeader title={session.title} titleTypographyProps={{variant: 'display1', backgroundColor: 'primary', color: 'textPrimary'}} />
           <CardContent >
             <Typography className={classes.pos} component="p">
               {session.description}
@@ -80,6 +80,9 @@ class SessionCard extends React.Component{
           </Typography>
           <Typography variant='headline'>
             {session.location.title}
+          </Typography>
+          <Typography variant='body1'>
+            {session.location.description}
           </Typography>
         </CardContent>
       </Card>
