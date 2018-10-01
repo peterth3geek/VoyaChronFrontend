@@ -9,6 +9,8 @@ const initialState = {
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],
+  locations: [],
+  currentSession: {title: ''}
   // characterTheme: characterTheme,
   // campaignTheme: campaignTheme,
   // eventTheme: eventTheme
@@ -22,6 +24,12 @@ const campaignReducer = (state = initialState, action) => {
     return {
       ...state,
       loading: true
+    }
+
+    case 'LOAD_LOCATIONS':
+    return {
+      ...state,
+      locations: action.payload.locations
     }
 
     case'LOAD_CAMPAIGN':
@@ -50,6 +58,12 @@ const campaignReducer = (state = initialState, action) => {
     return {
       ...state,
       currentChapter: action.payload.chapter
+    }
+
+    case 'LOAD_SESSION':
+    return {
+      ...state,
+      currentSession: action.payload.session
     }
 
     default:

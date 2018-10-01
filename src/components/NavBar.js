@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 // import MaterialBar from '../MaterialComponents/MaterialBar'
@@ -9,6 +10,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
+
 
 // import MenuItem from '@material-ui/core/MenuItem';
 // import Menu from '@material-ui/core/Menu';
@@ -28,6 +31,9 @@ const styles = {
 
 class NavBar extends React.Component{
 
+  sendHome = () => {
+    this.props.history.push(`/home`)
+  }
 
 
   render () {
@@ -44,7 +50,9 @@ class NavBar extends React.Component{
               VoyaChron
             </Typography>
             <div>
+              <Button onClick={this.sendHome}>
               @{this.props.currentUser.username}
+            </Button>
             </div>
           </Toolbar>
         </AppBar>
@@ -64,4 +72,4 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(NavBar);
+export default withRouter(compose(withStyles(styles), connect(mapStateToProps))(NavBar));

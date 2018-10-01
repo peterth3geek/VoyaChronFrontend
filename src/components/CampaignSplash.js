@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   // console.log('in map state to props', state)
   return{
     currentUser: state.initReducer.currentUser,
-    // currentCampaign: state.campaignReducer.currentCampaign
+    currentCampaign: state.campaignReducer.currentCampaign
   }
 }
 

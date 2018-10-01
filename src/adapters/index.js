@@ -13,6 +13,16 @@ export const fetchCampaign = (campaignID) => {
   .then(r=>r.json())
 }
 
+export const fetchSession = (sessionID) => {
+  return fetch(`http://localhost:3000/story_modules/${sessionID}`)
+  .then(r=>r.json())
+}
+
+export const fetchLocations = () => {
+  return fetch(`http://localhost:3000/locations`)
+  .then(r=>r.json())
+}
+
 export const eventPostFetch = (event) => {
   return fetch('http://localhost:3000/events', {
     method: 'POST',
@@ -20,6 +30,17 @@ export const eventPostFetch = (event) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(event)
+  }
+).then(r=>r.json())
+}
+
+export const sessionPostFetch = (session) => {
+  return fetch('http://localhost:3000/story_modules', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(session)
   }
 ).then(r=>r.json())
 }

@@ -17,6 +17,23 @@ export const loadChapter = (chapterID) => {
   }
 }
 
+export const loadSession = (sessionID) => {
+  return dispatch => {
+    Adapters.fetchSession(sessionID).then(session => {
+      dispatch(setSession(session))
+    })
+  }
+}
+
+export const setSession = (session) => {
+  return {
+    type: 'LOAD_SESSION',
+    payload: {
+      session
+    }
+  }
+}
+
 
 export const loadCampaign = (campaignID) => {
   // console.log('in load')
@@ -28,11 +45,30 @@ export const loadCampaign = (campaignID) => {
   }
 }
 
+export const loadLocations = () => {
+  return dispatch => {
+    Adapters.fetchLocations()
+    .then(locations => {
+      // console.log('in Actoin', locations)
+      dispatch(setLocations(locations))
+    })
+  }
+}
+
 export const createEvent = (event) => {
   return dispatch => {
     Adapters.eventPostFetch(event)
     .then(ev => {
       dispatch(eventPost(ev))
+    })
+  }
+}
+
+export const createSession = (session) => {
+  return dispatch => {
+    Adapters.sessionPostFetch(session)
+    .then(sess => {
+      dispatch(setSession(sess))
     })
   }
 }
@@ -52,7 +88,7 @@ export const prepLoadCampaign = () => {
   }
 }
 
-const setCampaign = (campaign) => {
+export const setCampaign = (campaign) => {
   return dispatch => {
     // console.log('REDUCING', campaign)
   const action = {
@@ -72,6 +108,16 @@ export const setChapter = (chapter) => {
     type: 'LOAD_CHAPTER',
     payload: {
       chapter
+    }
+  }
+}
+
+const setLocations = (locations) => {
+  // console.log('set location', locations)
+  return {
+    type: 'LOAD_LOCATIONS',
+    payload:{
+      locations
     }
   }
 }

@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-import { setChapter } from '../actions'
+import { setChapter, loadChapter } from '../actions'
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -47,13 +47,13 @@ const styles = {
 class EventCard extends React.Component{
 
 
-  eventClick = (e) => {
+  eventClick = () => {
     // const { event } = this.props;
     const { session } = this.props
     const chapter = this.props.session.chapter
     const campaign = chapter.campaign
-    this.props.setChapter(chapter)
-    console.log('chapter', chapter, 'session', session, 'campaign', campaign)
+    console.log('Event Click', chapter)
+    this.props.loadChapter(chapter.id)
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${session.id}`)
   }
 
@@ -114,4 +114,4 @@ EventCard.propTypes = {
 
 export default withRouter(
   compose(withStyles(styles),
-connect(mapStateToProps, { setChapter }))(EventCard));
+connect(mapStateToProps, { setChapter, loadChapter }))(EventCard));

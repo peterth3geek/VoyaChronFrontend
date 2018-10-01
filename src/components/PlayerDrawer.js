@@ -18,12 +18,11 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 import Typography from '@material-ui/core/Typography';
-
 import TextField from '@material-ui/core/TextField';
-
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+import PlayerDrawerCard from './PlayerDrawerCard'
 
 const styles = theme => ({
   root: {
@@ -112,59 +111,10 @@ if(formData !== '') {
 
     const campaign = this.props.campaign
 
-    const flexContainer = {
-      display: 'flex',
-      padding: '0.5vw',
-      width: '30vw',
-      height: '25vh',
-      marginTop: '1vh',
-      flexDirection: 'column',
-    }
-
     return campaign.characters.map(character => {
-      const { classes } = this.props;
-
+      // const { classes } = this.props;
       return  (
-        <div id={`character-${character.id}`} key={character.name} style={flexContainer}>
-        <Card style={{backgroundColor: '#616161', height: 150}}>
-          {/* <CardContent> */}
-            {/* <Typography style={{paddingLeft: '0.5vw', paddingTop: '0.5vh'}} className={classes.title} color="textSecondary"> */}
-              {/* <Button style={{paddingLeft: '0.5vw', paddingTop: '0.5vh', width: '30vw'}} size='small'>{character.name}</Button> */}
-            {/* </Typography> */}
-
-
-          <CardActions disableActionSpacing>
-            <form id={`character-event-${character.id}`} style={{padding: '0.5vw'}} data-tag={character.id} onSubmit={this.submitEvent}>
-              <TextField
-                style={{width: '26.5vw'}}
-                onKeyPress={this.handleEnter}
-                label={`${character.name}`}
-                placeholder={`What did ${character.name} do?`}
-                value={this.state[`character-event-${character.id}`]}
-                id={`character-event-${character.id}`}
-                name={'textData'}
-                multiline
-                margin='dense'
-                InputProps={{
-              endAdornment: (
-                <InputAdornment disableTypography position="end">
-                  <Typography variant='caption'>
-                    <Button color='primary'>
-                      Submit
-                    </Button>
-                  </Typography>
-                </InputAdornment>
-              ),
-            }}
-                // maxRows='4'
-                // width='15vw'
-                onChange={this.eventText}/>
-              {/* <Button style={{width: '26.5vw'}} type='submit' size='small'>Submit</Button> */}
-            </form>
-          </CardActions>
-          {/* </CardContent> */}
-        </Card>
-      </div>
+        <PlayerDrawerCard character={character}/>
       )
     })
   }
@@ -195,7 +145,7 @@ const mapStateToProps = (state) => {
   console.log('in map state to props', state)
   return{
     currentUser: state.initReducer.currentUser,
-    currentCampaign: state.campaignReducer.currentCampaign
+    currentCampaign: state.campaignReducer.currentCampaign,
   }
 }
 

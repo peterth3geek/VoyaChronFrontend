@@ -74,6 +74,7 @@ class ChapterCard extends React.Component{
     const { chapter } = this.props;
     const { campaign } = this.props;
 
+    
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${storyID}`)
 
   }
