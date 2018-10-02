@@ -11,14 +11,15 @@ import NoDataCard from './NoDataCard'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
     width: '50vw',
-    height: '55vh',
+    height: '89vh',
     overflow: 'auto',
     position: 'relative',
     display: 'flex',
@@ -83,7 +84,8 @@ class CharactersContainer extends React.Component{
       <div className={classes.card}>
         <div>
           <Typography variant='display2' component='h1'>
-            Characters:
+            Characters
+            <IconButton color='primary'><AddIcon fontSize='small'/></IconButton>
           </Typography>
         </div>
         <div style={flexContainer}>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+// import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
@@ -12,10 +12,11 @@ import { createEvent } from '../actions'
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+
 class PlayerDrawerCard extends React.Component{
 
   state = {
-    description: ''
+    description: '',
   }
 
   eventText = (e) => {
@@ -81,9 +82,9 @@ class PlayerDrawerCard extends React.Component{
               InputProps={{
             endAdornment: (
               <InputAdornment disableTypography position="end">
-                <Typography variant='caption'>
-                  <Button color='primary'>
-                    Submit
+                <Typography>
+                  <Button variant='outlined'>
+                    Create
                   </Button>
                 </Typography>
               </InputAdornment>

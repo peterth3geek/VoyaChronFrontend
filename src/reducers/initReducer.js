@@ -1,4 +1,3 @@
-import {characterTheme, campaignTheme, eventTheme} from '../adapters'
 
 const initialState = {
   loading: true,
@@ -20,7 +19,14 @@ const initReducer = (state = initialState, action) => {
     return {
       ...state,
       currentUser: action.payload.user,
+      userCharacters: action.payload.user.characters,
       loading: false
+    }
+
+    case'LOAD_CHARACTER':
+    return {
+      ...state,
+      userCharacters: [...state.userCharacters, action.payload.character]
     }
 
     default:

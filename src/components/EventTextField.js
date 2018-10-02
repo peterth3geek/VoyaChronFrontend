@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 
 import { withStyles } from '@material-ui/core/styles';
-import { withTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
@@ -61,7 +60,7 @@ class EventTextField extends React.Component{
         story_module_id: session,
         description: formData
       }
-
+      console.log('submitEvent', event)
       this.props.createEvent(event)
       this.setState({description: ''})
     }
@@ -75,16 +74,17 @@ class EventTextField extends React.Component{
       let { character } = this.props
 
       if (character == undefined){
-        character = {id: 1}
+        character = {id: 2}
       }
 
       if(eventKey === 'Enter'){
         e.preventDefault()
         const event ={
           character_id: character.id,
-          story_module_id: this.props.sessionID,
+          story_module_id: this.props.sessionID.id,
           description: formData
         }
+        console.log('eventEnter', event)
         this.props.createEvent(event)
         this.setState({
           description: ''
@@ -108,7 +108,7 @@ class EventTextField extends React.Component{
           InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <Button color='primary' onClick={this.submitEvent}>Create</Button>
+            <Button variant='outlined' color='primary' onClick={this.submitEvent}>Create</Button>
           </InputAdornment>
         ),
       }}

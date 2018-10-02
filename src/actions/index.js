@@ -8,24 +8,48 @@ export const loadUser = () => {
   }
 }
 
-export const loadChapter = (chapterID) => {
-  return dispatch => {
-    Adapters.fetchChapter(chapterID).then(chapter =>{
-      dispatch(setChapter(chapter))
-    }
-    )
-  }
-}
-
 export const loadSession = (sessionID) => {
   return dispatch => {
     Adapters.fetchSession(sessionID).then(session => {
+      // console.log('in loadSession', session)
       dispatch(setSession(session))
     })
   }
 }
 
+export const createCharacter = (character) => {
+  return dispatch => {
+    Adapters.characterPostFetch(character)
+    .then(char => {
+      dispatch(setCharacter(char))
+    })
+  }
+}
+
+export const setCharacter = (character) => {
+  // console.log('in setSession', session)
+  return {
+    type: 'LOAD_CHARACTER',
+    payload: {
+      character
+    }
+  }
+}
+
+
+export const createSession = (session, history, url) => {
+  return dispatch => {
+    Adapters.sessionPostFetch(session)
+    .then(sess => {
+      // console.log('in createSession', sess)
+      dispatch(setSession(sess))
+      history.push(url + sess.id)
+    })
+  }
+}
+
 export const setSession = (session) => {
+  // console.log('in setSession', session)
   return {
     type: 'LOAD_SESSION',
     payload: {
@@ -34,9 +58,22 @@ export const setSession = (session) => {
   }
 }
 
+export const createCampaign = (campaign, history, pushURL, user) => {
+  // console.log('createCampaign', campaign, 'url', pushURL)
+  return dispatch => {
+    Adapters.campaignPostFetch(campaign)
+    .then(camp => {
+      dispatch(createCharacter({user_id: user, campaign_id: camp.id, name: 'Dungeonmaster'}))
+      dispatch(setCampaign(camp))
+      history.push(pushURL + camp.id)
+    })
+
+  }
+}
+
 
 export const loadCampaign = (campaignID) => {
-  // console.log('in load')
+  console.log('in load', campaignID)
   return dispatch => {
     Adapters.fetchCampaign(campaignID)
     .then(campaign => {
@@ -64,15 +101,6 @@ export const createEvent = (event) => {
   }
 }
 
-export const createSession = (session) => {
-  return dispatch => {
-    Adapters.sessionPostFetch(session)
-    .then(sess => {
-      dispatch(setSession(sess))
-    })
-  }
-}
-
 const eventPost = (event) => {
   return {
     type: 'EVENT_POST_FETCH',
@@ -90,7 +118,7 @@ export const prepLoadCampaign = () => {
 
 export const setCampaign = (campaign) => {
   return dispatch => {
-    // console.log('REDUCING', campaign)
+    console.log('REDUCING', campaign)
   const action = {
     type: 'LOAD_CAMPAIGN',
     payload: {
@@ -100,6 +128,25 @@ export const setCampaign = (campaign) => {
 
   return dispatch(action)
 }
+}
+
+export const createChapter = (chapter, history, url) => {
+  return dispatch => {
+    Adapters.chapterPostFetch(chapter)
+    .then(chap => {
+      // console.log('in createChapter', chap)
+      dispatch(setChapter(chap))
+      history.push(url + chap.id)
+    })
+  }
+}
+export const loadChapter = (chapterID) => {
+  return dispatch => {
+    Adapters.fetchChapter(chapterID).then(chapter =>{
+      dispatch(setChapter(chapter))
+    }
+    )
+  }
 }
 
 export const setChapter = (chapter) => {

@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import EventListItem from './EventListItem'
 import EventCard from './EventCard'
 
 import Typography from '@material-ui/core/Typography';
@@ -61,8 +60,8 @@ class EventsContainer extends React.Component{
     return (
       <div>
         <div className={classes.headline}>
-          <Typography align='center' variant='display2'>
-            Events:
+          <Typography align='center' variant='display1'>
+            Events
           </Typography>
         </div>
       <div className={classes.root}>

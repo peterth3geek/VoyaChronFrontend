@@ -1,29 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
 import compose from 'recompose/compose'
-
 import { withStyles } from '@material-ui/core/styles';
 import { withTheme } from '@material-ui/core/styles';
-import { setChapter, loadChapter, loadLocations } from '../actions'
-
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
+import { setChapter, setCampaign, loadChapter, loadLocations } from '../actions'
 import Typography from '@material-ui/core/Typography';
-
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-
 import Button from '@material-ui/core/Button';
-import { createEvent } from '../actions';
 import SessionCard from './SessionCard';
 import SessionForm from './SessionForm'
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 
@@ -38,17 +26,22 @@ class ChapterSplash extends React.Component{
   }
 
   renderChapters = () => {
-    // console.log(this.props)
-    return this.props.currentChapter.story_modules.map(story =>{
-      // console.log('session', story);
-    return <SessionCard session={story} chapter={this.props.currentChapter} campaign={this.props.currentCampaign}/>
-    })
+
+    if(this.props.chapter.story_modules){
+      return this.props.chapter.story_modules.map(story =>{
+        return <SessionCard session={story} chapter={this.props.chapter} campaign={this.props.campaign}/>
+      })
+    }
+  }
+
+  campaignClick = () => {
+    this.props.setCampaign(this.props.campaign)
+    this.props.history.push(`/campaign/${this.props.campaign.id}`)
   }
 
   componentDidMount(){
-    if (!!this.props.currentChapter.title === false){
+    if (!!this.props.chapter.title === false){
       const chaptID = this.props.match.params.chapter
-      // console.log(chaptID)
     return  this.props.loadChapter(chaptID)
     }
     // return this.props.loadLocations()
@@ -64,14 +57,14 @@ class ChapterSplash extends React.Component{
 
     return (
       <div>
-        <SessionForm open={this.state.setOpen} chapter={this.props.currentChapter} campaign={this.props.currentCampaign} handleClose={this.handleClose}/>
-        <div style={{backgroundColor: '#424242', padding: '1vh', maxHeight: '30vh'}}>
+        <SessionForm open={this.state.setOpen} chapter={this.props.chapter} campaign={this.props.campaign} handleClose={this.handleClose}/>
+        <div style={{backgroundColor: '#424242', padding: '1vh', maxHeight: '30vh', minWidth: '70vw'}}>
           <List dense>
             <ListItem button onClick={this.campaignClick}>
               <Typography variant='subheading'>{this.props.campaign.title}</Typography>
             </ListItem>
-            <ListItem button onClick={this.chapterClick}>
-              <Typography variant='display1'>{`${this.props.currentChapter.title}`}</Typography>
+            <ListItem>
+              <Typography variant='display1'>{`${this.props.chapter.title}`}</Typography>
               <ListItemSecondaryAction>
                 <Button color='primary' variant='extendedFab' onClick={() => this.setState({setOpen: true})}>
                   New Session
@@ -79,7 +72,7 @@ class ChapterSplash extends React.Component{
               </ListItemSecondaryAction>
             </ListItem>
             <ListItem>
-              <Typography align='justified' paragraph>{this.props.currentChapter.description}</Typography>
+              <Typography align='justify' paragraph>{this.props.chapter.description}</Typography>
             </ListItem>
           </List>
         </div>
@@ -101,16 +94,16 @@ class ChapterSplash extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log('in map state to props', state)
+  // console.log('in map state to props', state)
   return{
     currentUser: state.initReducer.currentUser,
-    currentChapter: state.campaignReducer.currentChapter,
-    currentCampaign: state.campaignReducer.currentCampaign,
+    chapter: state.campaignReducer.currentChapter,
+    campaign: state.campaignReducer.currentCampaign,
     locations: state.campaignReducer.locations
   }
 }
 
 export default  withRouter(compose(
-  connect(mapStateToProps, { setChapter, loadChapter, loadLocations }),
+  connect(mapStateToProps, { setChapter, loadChapter, setCampaign, loadLocations }),
   withTheme(),
 )(ChapterSplash))

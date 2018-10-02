@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
 import { withRouter } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+
+import { setCampaign } from '../actions'
+
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -39,6 +44,7 @@ class CampaignCard extends React.Component{
 
   campaignClick = (e) => {
     const { campaign } = this.props;
+    this.props.setCampaign(campaign)
     this.props.history.push(`/campaign/${campaign.id}`)
   }
 
@@ -59,7 +65,7 @@ class CampaignCard extends React.Component{
         <CardActions>
           <Typography className={classes.pos}>
             <Button size='small' color='secondary'>
-              GM: @{campaign.dungeonmaster}
+              GM: @{campaign.dungeonmaster.username}
             </Button>
           </Typography>
         </CardActions>
@@ -84,4 +90,7 @@ CampaignCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(CampaignCard));
+export default withRouter(
+  compose(
+    connect(null, { setCampaign }),
+  withStyles(styles))(CampaignCard));

@@ -1,16 +1,15 @@
-import {characterTheme, campaignTheme, eventTheme} from '../adapters'
 
 const initialState = {
   loading: true,
   currentUser: {},
   currentChapter: {story_modules: []},
-  currentCampaign: {characters: [], chapters: []},
+  currentCampaign: {characters: [], chapters: [], dungeonmaster: {username: ''}},
   campaignEvents: [],
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],
   locations: [],
-  currentSession: {title: ''}
+  currentSession: {title: '', events: []}
   // characterTheme: characterTheme,
   // campaignTheme: campaignTheme,
   // eventTheme: eventTheme
@@ -34,11 +33,16 @@ const campaignReducer = (state = initialState, action) => {
 
     case'LOAD_CAMPAIGN':
     const eventArray = []
-    action.payload.campaign.characters.map(character => {
-      character.events.map(event => {
-        eventArray.push(event)
+    if(!!action.payload.campaign.characters){
+      action.payload.campaign.characters.map(character => {
+        if(!!character.events){
+          character.events.map(event => {
+            eventArray.push(event)
+          })  
+        }
       })
-    })
+    }
+
     return {
       ...state,
       currentCampaign: action.payload.campaign,
@@ -61,6 +65,9 @@ const campaignReducer = (state = initialState, action) => {
     }
 
     case 'LOAD_SESSION':
+    console.log('LOAD_SESSION', action.payload.session)
+    // browserHistory.push(`/campaign/${state.currentCampaign.id}/state`)
+
     return {
       ...state,
       currentSession: action.payload.session

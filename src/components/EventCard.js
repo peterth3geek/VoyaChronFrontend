@@ -52,7 +52,7 @@ class EventCard extends React.Component{
     const { session } = this.props
     const chapter = this.props.session.chapter
     const campaign = chapter.campaign
-    console.log('Event Click', chapter)
+    // console.log('Event Click', chapter)
     this.props.loadChapter(chapter.id)
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${session.id}`)
   }
@@ -68,11 +68,11 @@ class EventCard extends React.Component{
       <CardActionArea className={classes.actionClass} onClick={this.eventClick}>
           <CardContent >
             <Typography className={classes.title} color="textSecondary">
-              { !!character ?
-                character.name
-                :
-                'GM'
-              }
+                { !!character ?
+                  character.name
+                  :
+                  'GM'
+                }
             </Typography>
             <Typography className={classes.pos} component="p">
               {event.description}

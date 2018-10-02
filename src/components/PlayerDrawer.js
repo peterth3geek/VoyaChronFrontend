@@ -10,17 +10,9 @@ import { withTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 
 import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
 
 import { createEvent } from '../actions'
-
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 import PlayerDrawerCard from './PlayerDrawerCard'
 
@@ -28,6 +20,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: '93.3vh',
+    minWidth: '30vw',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -47,6 +40,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     height: '93.3vh',
+    width: '30vw',
     overflow: 'scroll',
   },
   toolbar: theme.mixins.toolbar,
@@ -109,14 +103,20 @@ if(formData !== '') {
 
   mapCharacters = () => {
 
-    const campaign = this.props.campaign
+    const { campaign } = this.props
+    if(campaign.characters.length > 0){
+      console.log('hits character map')
+      return campaign.characters.map(character => {
+        // const { classes } = this.props;
+        return  (
+          <PlayerDrawerCard character={character}/>
+        )
+      })
+    } else {
+      console.log('hits button render')
+      return <Button variant='outlined' color='primary'>Add Characters</Button>
+    }
 
-    return campaign.characters.map(character => {
-      // const { classes } = this.props;
-      return  (
-        <PlayerDrawerCard character={character}/>
-      )
-    })
   }
 
   render() {
@@ -124,14 +124,14 @@ if(formData !== '') {
     // console.log(this.state)
     return (
       <div className={classes.root}>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-            {this.mapCharacters()}
-        </Drawer>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+              {this.mapCharacters()}
+          </Drawer>
       </div>
     );
   }
@@ -145,7 +145,8 @@ const mapStateToProps = (state) => {
   console.log('in map state to props', state)
   return{
     currentUser: state.initReducer.currentUser,
-    currentCampaign: state.campaignReducer.currentCampaign,
+    characters: state.initReducer.userCharacters,
+    campaign: state.campaignReducer.currentCampaign,
   }
 }
 

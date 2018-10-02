@@ -7,18 +7,18 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CampaignCard from './CampaignCard'
 import NoDataCard from './NoDataCard'
+import CampaignForm from './CampaignForm'
 
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
     width: '50vw',
-    height: '55vh',
+    height: '89vh',
     overflow: 'auto',
     position: 'relative',
     display: 'flex',
@@ -48,12 +48,31 @@ const styles = {
 
 class CampaignsContainer extends React.Component{
   state = {
-    loading: true
+    loading: true,
+    setOpen: false
+  }
+
+  handleClose = () => {
+    this.setState({setOpen: false})
   }
 
   mountCampaigns = (style) => {
     if(this.props.campaigns.length > 0){
-      return  this.props.campaigns.map(campaign => {
+
+      const { campaigns } = this.props
+      const checker = []
+      const filteredCampaigns = []
+
+      for(let i=0; i<campaigns.length; i++) {
+        if( checker[campaigns[i].id]) continue;
+        checker[campaigns[i].id] = true;
+        filteredCampaigns.push(campaigns[i]);
+      }
+
+      // const filteredCampaigns = campains.filter(campaign => )
+
+      return filteredCampaigns.map(campaign => {
+        // console.log(campaign)
         return (<GridListTile style={{height: 375}} className={style}>
         <CampaignCard key={campaign.id} campaign={campaign} />
       </GridListTile>)
@@ -77,11 +96,17 @@ class CampaignsContainer extends React.Component{
       alignItems: 'center',
     }
 
+    // console.log()
+
     return (
       <div className={classes.card}>
+        <CampaignForm open={this.state.setOpen} user={this.props.currentUser} handleClose={this.handleClose}/>
         <div>
           <Typography variant='display2' component='h1'>
-            Campaigns:
+            Campaigns
+            <IconButton color='primary' onClick={() => this.setState({setOpen: true})}>
+              <AddIcon fontSize='small'/>
+            </IconButton>
           </Typography>
         </div>
         <div  style={flexContainer}>
@@ -96,7 +121,7 @@ class CampaignsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
   return{
-    campaigns: state.initReducer.currentUser.campaigns,
+    campaigns: [...state.initReducer.currentUser.campaigns],
   }
 }
 

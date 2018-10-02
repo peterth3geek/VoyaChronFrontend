@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
+import CasinoIcon from '@material-ui/icons/Casino'
 
 
 // import MenuItem from '@material-ui/core/MenuItem';
@@ -43,12 +44,14 @@ class NavBar extends React.Component{
       <div className={classes.root}>
         <AppBar position="static" color='primary'>
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.sendHome}>
+              <CasinoIcon fontSize='large'/>
             </IconButton>
-            <Typography variant="title" color="inherit" className={classes.grow}>
-              VoyaChron
-            </Typography>
+            {/* <Button variant='contained' color='primary' onClick={this.sendHome}> */}
+              <Typography variant="title" color="inherit" className={classes.grow}>
+                VoyaChron
+              </Typography>
+            {/* </Button> */}
             <div>
               <Button onClick={this.sendHome}>
               @{this.props.currentUser.username}

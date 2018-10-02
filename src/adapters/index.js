@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+// import { createMuiTheme } from '@material-ui/core/styles';
 // #700297
 // #0097A7
 // #ddc700
@@ -41,6 +41,39 @@ export const sessionPostFetch = (session) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(session)
+  }
+).then(r=>r.json())
+}
+
+export const chapterPostFetch = (chapter) => {
+  return fetch('http://localhost:3000/chapters', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(chapter)
+  }
+).then(r=>r.json())
+}
+
+export const campaignPostFetch = (campaign) => {
+  return fetch('http://localhost:3000/campaigns', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(campaign)
+  }
+).then(r=>r.json())
+}
+
+export const characterPostFetch = (character) => {
+  return fetch('http://localhost:3000/characters', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(character)
   }
 ).then(r=>r.json())
 }

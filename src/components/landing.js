@@ -16,13 +16,13 @@ class Landing extends React.Component{
 
       return (
         <div>
-          <div>
-            <EventsContainer />
-          </div>
           <div style={{display: 'flex', flexDirection: 'row', align: 'center'}} >
             <CampaignsContainer />
             <CharactersContainer />
           </div>
+          {/* <div>
+            <EventsContainer />
+          </div> */}
         </div>
     )
     // }

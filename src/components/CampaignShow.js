@@ -1,24 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { withRouter, Switch, Route } from 'react-router-dom'
 
-import { withStyles } from '@material-ui/core/styles';
-
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import { loadCampaign } from '../actions'
-
 import compose from 'recompose/compose'
-import { withTheme } from '@material-ui/core/styles';
-
-import Typography from '@material-ui/core/Typography';
-
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActionArea from '@material-ui/core/CardActionArea';
-
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+// import { withTheme } from '@material-ui/core/styles';
 
 import EventSplash from './EventSplash'
 import CampaignSplash from './CampaignSplash'

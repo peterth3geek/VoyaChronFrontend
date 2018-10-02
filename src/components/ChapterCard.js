@@ -1,41 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
+import compose from 'recompose/compose'
 import { withRouter } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import compose from 'recompose/compose'
 import { withTheme } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
-
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import Collapse from '@material-ui/core/Collapse';
-
-import { setChapter } from '../actions'
+import { setChapter, loadSession } from '../actions'
 
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 const styles = {
   card: {
     margin:'2vw',
     minWidth: 400,
     maxWidth: '30vw',
-    height: 510,
+    minHeight: 510,
+    // maxHeight: '35vh',
     backgroundColor: '#616161',
+    // overflow: 'scroll'
   },
   title: {
     marginBottom: 16,
@@ -74,7 +68,7 @@ class ChapterCard extends React.Component{
     const { chapter } = this.props;
     const { campaign } = this.props;
 
-    
+    this.props.loadSession(storyID)
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${storyID}`)
 
   }
@@ -93,13 +87,14 @@ class ChapterCard extends React.Component{
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardContent>
+        <CardContent style={{overflow: 'scroll'}}>
           <Typography variant='title'>
             Sessions
           </Typography>
           <List style={{display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'space-around'}}
+            justifyContent: 'space-around',
+            overflow: 'scroll'}}
             cols={2}>
             {chapter.story_modules.map(story =>{
               // console.log(story);
@@ -137,4 +132,7 @@ ChapterCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(compose(connect(null, { setChapter }), withStyles(styles), withTheme())(ChapterCard));
+export default withRouter(
+  compose(
+    connect(null, { setChapter, loadSession }),
+    withStyles(styles), withTheme())(ChapterCard));
