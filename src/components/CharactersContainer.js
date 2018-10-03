@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CharacterCard from './CharacterCard'
 import NoDataCard from './NoDataCard'
+import CharacterForm from './CharacterForm'
+
 
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -50,7 +52,8 @@ const styles = {
 
 class CharactersContainer extends React.Component{
   state = {
-    loading: true
+    loading: true,
+    setOpen: false,
   }
 
   mountCharacters = (style) => {
@@ -85,9 +88,10 @@ class CharactersContainer extends React.Component{
         <div>
           <Typography variant='display2' component='h1'>
             Characters
-            <IconButton color='primary'><AddIcon fontSize='small'/></IconButton>
+            <IconButton color='primary' onClick={() => this.setState({setOpen: true})}><AddIcon fontSize='small'/></IconButton>
           </Typography>
         </div>
+        <CharacterForm open={this.state.setOpen} handleClose={() => this.setState({setOpen: false})}/>
         <div style={flexContainer}>
           <GridList className={classes.grid} cols={2}>
             {this.mountCharacters(classes.gridTile)}

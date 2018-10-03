@@ -38,7 +38,7 @@ const campaignReducer = (state = initialState, action) => {
         if(!!character.events){
           character.events.map(event => {
             eventArray.push(event)
-          })  
+          })
         }
       })
     }
@@ -65,9 +65,6 @@ const campaignReducer = (state = initialState, action) => {
     }
 
     case 'LOAD_SESSION':
-    console.log('LOAD_SESSION', action.payload.session)
-    // browserHistory.push(`/campaign/${state.currentCampaign.id}/state`)
-
     return {
       ...state,
       currentSession: action.payload.session

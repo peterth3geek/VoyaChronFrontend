@@ -1,30 +1,43 @@
-// import { createMuiTheme } from '@material-ui/core/styles';
-// #700297
-// #0097A7
-// #ddc700
 
-export const fetchUser = () => {
-  return fetch('http://localhost:3000/users/3')
+const userURL = 'http://localhost:3000/users'
+const campaignURL =`http://localhost:3000/campaigns`
+const sessionURL = 'http://localhost:3000/story_modules'
+const locationURL = 'http://localhost:3000/locations'
+const eventURL = 'http://localhost:3000/events'
+const chapterURL = 'http://localhost:3000/chapters'
+const characterURL = 'http://localhost:3000/characters'
+
+// GET REQUESTS
+
+export const fetchUser = (userID = 3) => {
+  return fetch(`${userURL}/${userID}`)
   .then(r=>r.json())
 }
 
 export const fetchCampaign = (campaignID) => {
-  return fetch(`http://localhost:3000/campaigns/${campaignID}`)
+  return fetch(`${campaignURL}/${campaignID}`)
   .then(r=>r.json())
 }
 
 export const fetchSession = (sessionID) => {
-  return fetch(`http://localhost:3000/story_modules/${sessionID}`)
+  return fetch(`${sessionURL}/${sessionID}`)
   .then(r=>r.json())
 }
 
 export const fetchLocations = () => {
-  return fetch(`http://localhost:3000/locations`)
+  return fetch(`${locationURL}`)
   .then(r=>r.json())
 }
 
+export const fetchChapter = (chapterID) => {
+  return fetch(`${chapterURL}/${chapterID}`)
+  .then(r=>r.json())
+}
+
+// POST REQUESTS
+
 export const eventPostFetch = (event) => {
-  return fetch('http://localhost:3000/events', {
+  return fetch(`${eventURL}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -35,7 +48,7 @@ export const eventPostFetch = (event) => {
 }
 
 export const sessionPostFetch = (session) => {
-  return fetch('http://localhost:3000/story_modules', {
+  return fetch(sessionURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -46,7 +59,7 @@ export const sessionPostFetch = (session) => {
 }
 
 export const chapterPostFetch = (chapter) => {
-  return fetch('http://localhost:3000/chapters', {
+  return fetch(chapterURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -57,7 +70,7 @@ export const chapterPostFetch = (chapter) => {
 }
 
 export const campaignPostFetch = (campaign) => {
-  return fetch('http://localhost:3000/campaigns', {
+  return fetch(campaignURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -68,7 +81,7 @@ export const campaignPostFetch = (campaign) => {
 }
 
 export const characterPostFetch = (character) => {
-  return fetch('http://localhost:3000/characters', {
+  return fetch(characterURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -78,44 +91,11 @@ export const characterPostFetch = (character) => {
 ).then(r=>r.json())
 }
 
-export const fetchChapter = (chapterID) => {
-  console.log('fetch', chapterID)
-  return fetch(`http://localhost:3000/chapters/${chapterID}`)
-  .then(r=>r.json())
+// DELETE REQUESTS
+export const campaignDelete = (campaign) => {
+  console.log('in fetch', campaign)
+  return fetch(`${campaignURL}/${campaign.id}`, {
+    method: 'DELETE',
+    body: JSON.stringify(campaign)
+  }).then(r=>r.json()).catch(error => console.log(error))
 }
-
-// export const characterTheme = createMuiTheme({
-//   palette: {
-//     type: 'dark',
-//     primary: {main: '#0097A7'},
-//     secondary: {main: '#700297'}
-//   },
-//   status: {
-//     danger: '#ddc700',
-//     error: '#bc0042'
-//   }
-// })
-//
-// export const campaignTheme = createMuiTheme({
-//   palette: {
-//     type: 'dark',
-//     primary: {main: '#c43e00'},
-//     secondary: {main: '#5ddef4'}
-//   },
-//   status: {
-//     danger: '#ddc700',
-//     error: '#bc0042'
-//   }
-// })
-//
-// export const eventTheme = createMuiTheme({
-//   palette: {
-//     type: 'dark',
-//     primary: {main: '#5ddef4'},
-//     secondary: {main: '#e5db00'}
-//   },
-//   status: {
-//     danger: '#ddc700',
-//     error: '#bc0042'
-//   }
-// })

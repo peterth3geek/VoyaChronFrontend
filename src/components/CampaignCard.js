@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { setCampaign } from '../actions'
+import { setCampaign, deleteCampaign } from '../actions'
 
 
 import Card from '@material-ui/core/Card';
@@ -18,14 +18,20 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
+
 
 const styles = {
   card: {
     margin:'2vw',
     minWidth: 370,
     maxWidth: '30vw',
-    height: 325,
+    minHeight: 325,
+    maxHeight: '30vh',
     backgroundColor: '#616161',
+    // overflow: 'scroll',
   },
   title: {
     marginBottom: 16,
@@ -35,6 +41,8 @@ const styles = {
     marginBottom: 12,
     overflow: 'hidden',
     align: 'center',
+    minWidth: '370',
+    maxWidth: '30vw',
     height: 145,
   },
 };
@@ -54,8 +62,8 @@ class CampaignCard extends React.Component{
   return  (
     <div>
       <Card className={classes.card}>
-      <CardActionArea onClick={this.campaignClick}>
-        <CardHeader title={campaign.title} subheader='Dungeons and Dragons 5e (Non-Fetched)' />
+      <CardActionArea disableActionSpacing style={{minWidth: 370, maxWidth: '30vw',}} onClick={this.campaignClick}>
+        <CardHeader style={{maxHeight: 75}} title={campaign.title} />
           <CardContent >
             <Typography className={classes.pos} component="p">
               {campaign.description}
@@ -67,6 +75,12 @@ class CampaignCard extends React.Component{
             <Button size='small' color='secondary'>
               GM: @{campaign.dungeonmaster.username}
             </Button>
+            <IconButton mini>
+            <EditOutlinedIcon fontSize='small'/>
+            </IconButton>
+            <IconButton mini>
+            <DeleteOutlinedIcon fontSize='small' onClick={() => this.props.deleteCampaign(campaign, this.props.history)}/>
+            </IconButton>
           </Typography>
         </CardActions>
       </Card>
@@ -92,5 +106,5 @@ CampaignCard.propTypes = {
 
 export default withRouter(
   compose(
-    connect(null, { setCampaign }),
+    connect(null, { setCampaign, deleteCampaign }),
   withStyles(styles))(CampaignCard));

@@ -5,6 +5,8 @@ import CampaignsContainer from './CampaignsContainer'
 import CharactersContainer from './CharactersContainer'
 import EventsContainer from './EventsContainer'
 
+import { setCampaign } from '../actions'
+
 import compose from 'recompose/compose'
 import { withTheme } from '@material-ui/core/styles';
 
@@ -30,6 +32,7 @@ class Landing extends React.Component{
 
   componentDidMount(){
     this.setState({loading: false})
+    this.props.setCampaign({characters: [], chapters: [], dungeonmaster: {username: null}})
   }
 
   render () {
@@ -51,6 +54,6 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, { setCampaign }),
   withTheme()
 )(Landing)

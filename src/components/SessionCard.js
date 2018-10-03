@@ -14,7 +14,8 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
   card: {
     margin:'2vw',
-    width: 400,
+    minWidth: 370,
+    maxWidth: '30vw',
     height: 510,
     backgroundColor: '#616161',
   },
@@ -24,12 +25,16 @@ const styles = {
   },
   pos: {
     marginBottom: 12,
+    minWidth: 370,
+    maxWidth: '30vw',
     overflow: 'scroll',
     align: 'center',
     height: 125,
   },
   pos2: {
     marginBottom: 12,
+    minWidth: 370,
+    maxWidth: '30vw',
     overflow: 'scroll',
     align: 'center',
     height: 175,
@@ -55,7 +60,7 @@ class SessionCard extends React.Component{
   return  (
     <div>
       <Card className={classes.card}>
-        <CardActionArea onClick={this.sessionClick}>
+        <CardActionArea onClick={this.sessionClick} style={{minWidth: 370, maxWidth: '30vw',}}>
         <CardHeader title={session.title} titleTypographyProps={{variant: 'display1', backgroundColor: 'primary', color: 'textPrimary'}} />
           <CardContent >
             <Typography className={classes.pos} component="p">

@@ -60,13 +60,7 @@ class PlayerDrawerCard extends React.Component{
     }
     return (
       <div id={`character-${character.id}`} key={character.name} style={flexContainer}>
-      <Card style={{backgroundColor: '#616161', height: 150}}>
-        {/* <CardContent> */}
-          {/* <Typography style={{paddingLeft: '0.5vw', paddingTop: '0.5vh'}} className={classes.title} color="textSecondary"> */}
-            {/* <Button style={{paddingLeft: '0.5vw', paddingTop: '0.5vh', width: '30vw'}} size='small'>{character.name}</Button> */}
-          {/* </Typography> */}
-
-
+      <Card style={{backgroundColor: '#616161', height: 120}}>
         <CardActions disableActionSpacing>
           <form id={`character-event-${character.id}`} style={{padding: '0.5vw'}} data-tag={character.id} onSubmit={this.submitEvent}>
             <TextField
@@ -78,25 +72,29 @@ class PlayerDrawerCard extends React.Component{
               id={`character-event-${character.id}`}
               name='textData'
               multiline
+              disabled={ !!this.props.session.id ?
+                false
+                :
+                true
+              }
               margin='dense'
               InputProps={{
             endAdornment: (
               <InputAdornment disableTypography position="end">
                 <Typography>
+                { !!this.props.session.id ?
                   <Button variant='outlined'>
                     Create
                   </Button>
+                  :
+                  ''}
                 </Typography>
               </InputAdornment>
             ),
           }}
-              // maxRows='4'
-              // width='15vw'
               onChange={this.eventText}/>
-            {/* <Button style={{width: '26.5vw'}} type='submit' size='small'>Submit</Button> */}
           </form>
         </CardActions>
-        {/* </CardContent> */}
       </Card>
     </div>
     )

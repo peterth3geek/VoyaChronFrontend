@@ -61,7 +61,14 @@ class ChapterSplash extends React.Component{
         <div style={{backgroundColor: '#424242', padding: '1vh', maxHeight: '30vh', minWidth: '70vw'}}>
           <List dense>
             <ListItem button onClick={this.campaignClick}>
-              <Typography variant='subheading'>{this.props.campaign.title}</Typography>
+              <Typography variant='subheading'>
+                {this.props.campaign.title}
+              </Typography>
+              <ListItemSecondaryAction>
+                <Typography variant='subheading'>
+                  {!!this.props.session.id ?  `Current Session - ${this.props.session.title}` : ''}
+                </Typography>
+              </ListItemSecondaryAction>
             </ListItem>
             <ListItem>
               <Typography variant='display1'>{`${this.props.chapter.title}`}</Typography>
@@ -99,7 +106,8 @@ const mapStateToProps = (state) => {
     currentUser: state.initReducer.currentUser,
     chapter: state.campaignReducer.currentChapter,
     campaign: state.campaignReducer.currentCampaign,
-    locations: state.campaignReducer.locations
+    locations: state.campaignReducer.locations,
+    session: state.campaignReducer.currentSession
   }
 }
 

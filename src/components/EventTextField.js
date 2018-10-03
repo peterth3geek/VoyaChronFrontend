@@ -8,6 +8,12 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { createEvent } from '../actions'
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   root: {
@@ -36,7 +42,8 @@ const styles = theme => ({
 class EventTextField extends React.Component{
 
   state = {
-    description: ''
+    description: '',
+    character: null,
   }
 
   eventText = (e) => {
@@ -47,67 +54,112 @@ class EventTextField extends React.Component{
     this.setState({description: description})
   }
 
+  handleChange = (e) => {
+    const keyType = e.target.name
+    const { value } = e.target
+    this.setState(prevState =>(
+      {...prevState,
+      [`${keyType}`]: value
+    }))
+  }
+
   submitEvent = (e) => {
     // const formID = e.target.id
-    const formData = this.state.description
-    const characterID = e.target.dataset.tag
+    const { description } = this.state
+    const character_id = this.state.character
     const session = this.props.sessionID
     // e.preventDefault()
 
-  if(formData !== '') {
+  if(character_id !== '' || description !== '') {
       const event ={
-        character_id: characterID,
+        character_id,
         story_module_id: session,
-        description: formData
+        description
       }
-      console.log('submitEvent', event)
+      // console.log('submitEvent', event)
       this.props.createEvent(event)
-      this.setState({description: ''})
+      this.setState(prevState => ({...prevState, description: ''}))
     }
 
   }
 
 
   eventEnter = (e) => {
-      const eventKey = e.key
-      const formData = this.state.description
-      let { character } = this.props
+    const eventKey = e.key
+    const description = this.state.description
+    const character_id = this.state.character
 
-      if (character == undefined){
-        character = {id: 2}
-      }
+    if(eventKey === 'Enter'){
+      e.preventDefault()
+      console.log(this.state.character)
 
-      if(eventKey === 'Enter'){
-        e.preventDefault()
+      if(description === "" || this.state.character === null){
+        console.log(`BAD REQUEST! BAD`)
+      } else {
         const event ={
-          character_id: character.id,
+          character_id,
           story_module_id: this.props.sessionID.id,
-          description: formData
+          description,
         }
-        console.log('eventEnter', event)
+        // console.log('eventEnter', event)
         this.props.createEvent(event)
-        this.setState({
+        this.setState(prevState => ({
+          ...prevState,
           description: ''
-        })
+        }))
       }
+    }
+  }
+
+    componentDidMount(){
+      // const characters = this.props.campaign.characters.filter(character => {
+      //   return character.campaign.id === this.props.campaign.id
+      // })
     }
 
   render () {
+
+    const characters = this.props.campaign.characters.filter(character => {
+      return character.campaign.id === this.props.campaign.id
+    })
+    console.log('state', this.state, 'dm', this.props.campaign.characters.filter(character => {
+      return character.name === 'Dungeonmaster'
+    }))
     return (
       <div>
         <TextField
           value={this.state.description}
           placeholder='Enter your events here...'
           label='Event Text'
+          name='description'
           // className={classes.textField}
           onKeyDown={this.eventEnter}
-          onChange={this.eventText}
-          style={{minWidth: 400,
-              maxWidth: '30vw',}}
+          onChange={this.handleChange}
+          style={{maxWidth: 600,
+              minWidth: '40vw',}}
           multiline
           InputProps={{
         endAdornment: (
           <InputAdornment position="end">
+          <FormControl required>
+            <InputLabel htmlFor="character">Event As</InputLabel>
+            <Select
+              style={{width: '12vw', height: 70}}
+              value={this.state.character}
+              onChange={this.handleChange}
+              input={<Input name='character' id="character" />}
+              // defaultValue={this.props.campaign.dungeonmaster.id}
+            >
+              {characters.map((character, index) => {
+                const name = character.name
+                return <MenuItem
+                  key={character.name}
+                  value={character.id}>
+                  {name}
+                </MenuItem>
+              })}
+            </Select>
+          </FormControl>
             <Button variant='outlined' color='primary' onClick={this.submitEvent}>Create</Button>
           </InputAdornment>
         ),
@@ -119,5 +171,12 @@ class EventTextField extends React.Component{
   }
 }
 
-export default compose(connect(null, { createEvent }),
+const mapStateToProps = (state) => {
+  return {
+    characters: state.initReducer.userCharacters,
+    // campaign: state.campaignReducer.currentCampaign
+  }
+}
+
+export default compose(connect(mapStateToProps, { createEvent }),
 withStyles(styles))(EventTextField)

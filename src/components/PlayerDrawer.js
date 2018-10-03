@@ -15,6 +15,8 @@ import Button from '@material-ui/core/Button';
 import { createEvent } from '../actions'
 
 import PlayerDrawerCard from './PlayerDrawerCard'
+import CharacterForm from './CharacterForm'
+
 
 const styles = theme => ({
   root: {
@@ -34,9 +36,6 @@ const styles = theme => ({
   pos: {
     marginBottom: 12,
   },
-  // 'appBar-right': {
-  //   marginRight: '35vw',
-  // },
   drawerPaper: {
     position: 'relative',
     height: '93.3vh',
@@ -48,7 +47,9 @@ const styles = theme => ({
 
 class PlayerDrawer extends React.Component {
 
-  state = {}
+  state = {
+    setOpen: false,
+  }
 
   handleEnter = (e) => {
     const eventKey = e.key
@@ -56,8 +57,6 @@ class PlayerDrawer extends React.Component {
 
     if(eventKey === 'Enter'){
       e.preventDefault()
-
-      console.log('Enter', e.target, formData)
       const event ={
         character_id: 1,
         story_module_id: 1,
@@ -81,14 +80,11 @@ class PlayerDrawer extends React.Component {
 
   submitEvent = (e) => {
     e.preventDefault()
-    // console.log('e.target =', e.target)
+
     const formID = e.target.id
     const formData = e.target.textData.value
-    // const characterID = formID.split('-').pop()
     const characterID = e.target.dataset.tag
-    // console.log('characterID = ', characterID)
 
-    // console.log('e.target.dataset', e.target.dataset.tag)
 if(formData !== '') {
     const event ={
       character_id: characterID,
@@ -105,31 +101,34 @@ if(formData !== '') {
 
     const { campaign } = this.props
     if(campaign.characters.length > 0){
-      console.log('hits character map')
       return campaign.characters.map(character => {
-        // const { classes } = this.props;
         return  (
           <PlayerDrawerCard character={character}/>
         )
       })
     } else {
-      console.log('hits button render')
-      return <Button variant='outlined' color='primary'>Add Characters</Button>
     }
-
   }
+
 
   render() {
     const { classes } = this.props;
-    // console.log(this.state)
+
     return (
       <div className={classes.root}>
+        <CharacterForm open={this.state.setOpen} handleClose={() => this.setState({setOpen: false})}/>
+
           <Drawer
             variant="permanent"
             classes={{
               paper: classes.drawerPaper,
             }}
           >
+          {this.props.campaign.characters.length >= 6 ?
+            ''
+            :
+            <Button variant='outlined' color='primary' onClick={() => this.setState({setOpen: true})} >Add Characters</Button>
+          }
               {this.mapCharacters()}
           </Drawer>
       </div>

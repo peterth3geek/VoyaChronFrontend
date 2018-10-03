@@ -12,7 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 
-import { createEvent, loadSession, loadChapter, setChapter, setCampaign } from '../actions'
+import { createEvent, loadSession, setSession, loadChapter, setChapter, setCampaign } from '../actions'
 
 import EventTextField from './EventTextField'
 import EventCard from './EventCard'
@@ -75,29 +75,23 @@ class EventSplash extends React.Component{
   }
 
   componentDidMount(){
-    // console.log('did mount', this.props.match.params.slug)
     const chapterID = this.props.match.params.chapter
-    // const campaignID = this.props.match.params.campaign
-
-    // console.log('capter', this.props)
-
     this.props.loadChapter(chapterID)
-    // this.props.loadSession(sessionID)
+  }
+
+  componentWillUnmount(){
+    this.props.setSession({title: '', events: []})
   }
 
   componentWillMount(){
     const sessionID = this.props.match.params.session
-    // console.log('componentWillMount', sessionID)
     this.props.loadSession(sessionID)
   }
 
-  render () {
+  render() {
     const { classes } = this.props;
     const { chapter } = this.props
     const { campaign } = this.props
-
-    console.log(this.props)
-
     return (
       <div style={{flexDirection: 'row'}}>
         <div style={{backgroundColor: '#424242', padding: '1vh', maxHeight: '30vh'}}>
@@ -118,7 +112,7 @@ class EventSplash extends React.Component{
             {this.mapEvents()}
         </div>
         <div>
-          <EventTextField sessionID={this.props.session}/>
+          <EventTextField sessionID={this.props.session} campaign={this.props.campaign} user={this.props.currentUser}/>
         </div>
       </div>
       {/* <div>
@@ -136,11 +130,11 @@ const mapStateToProps = (state) => {
     eventArray: state.campaignReducer.campaignEvents,
     chapter: state.campaignReducer.currentChapter,
     session: state.campaignReducer.currentSession,
-
+    campaign: state.campaignReducer.currentCampaign,
   }
 }
 
 export default withRouter(compose(
-  connect(mapStateToProps, { createEvent, loadSession, loadChapter, setChapter, setCampaign }),
+  connect(mapStateToProps, { createEvent, loadSession, setSession, loadChapter, setChapter, setCampaign }),
   withTheme(),
   withStyles(styles))(EventSplash))

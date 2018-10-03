@@ -39,7 +39,7 @@ class CharacterCard extends React.Component{
     return (
       <div >
         <Card className={classes.card}>
-          <CardActionArea>
+          <CardActionArea style={{minWidth: 370, maxWidth: '30vw',}}>
             <CardHeader
               title={this.props.character.name}
               subheader='Dungeons and Dragons Non-Fetched' />

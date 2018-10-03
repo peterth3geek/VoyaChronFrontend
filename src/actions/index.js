@@ -1,5 +1,6 @@
 import * as Adapters from '../adapters'
 
+// User Actions
 export const loadUser = () => {
   return (dispatch) => {
     Adapters.fetchUser().then(user => {
@@ -8,6 +9,17 @@ export const loadUser = () => {
   }
 }
 
+const setUser = (user) => {
+  return {
+    type: 'LOAD_USER',
+    payload: {
+      user
+    }
+  }
+}
+// ========================================================
+
+// SESSION ACTIONS
 export const loadSession = (sessionID) => {
   return dispatch => {
     Adapters.fetchSession(sessionID).then(session => {
@@ -16,26 +28,6 @@ export const loadSession = (sessionID) => {
     })
   }
 }
-
-export const createCharacter = (character) => {
-  return dispatch => {
-    Adapters.characterPostFetch(character)
-    .then(char => {
-      dispatch(setCharacter(char))
-    })
-  }
-}
-
-export const setCharacter = (character) => {
-  // console.log('in setSession', session)
-  return {
-    type: 'LOAD_CHARACTER',
-    payload: {
-      character
-    }
-  }
-}
-
 
 export const createSession = (session, history, url) => {
   return dispatch => {
@@ -57,7 +49,9 @@ export const setSession = (session) => {
     }
   }
 }
+//========================================================
 
+// Campaign  Actions
 export const createCampaign = (campaign, history, pushURL, user) => {
   // console.log('createCampaign', campaign, 'url', pushURL)
   return dispatch => {
@@ -71,6 +65,15 @@ export const createCampaign = (campaign, history, pushURL, user) => {
   }
 }
 
+export const deleteCampaign = (campaign, history) => {
+  return dispatch => {
+    Adapters.campaignDelete(campaign)
+    .then(response => {
+      console.log('in delete dispatch', response)
+      history.push(`boo`)
+    })
+  }
+}
 
 export const loadCampaign = (campaignID) => {
   console.log('in load', campaignID)
@@ -79,34 +82,6 @@ export const loadCampaign = (campaignID) => {
     .then(campaign => {
       dispatch(setCampaign(campaign))
     })
-  }
-}
-
-export const loadLocations = () => {
-  return dispatch => {
-    Adapters.fetchLocations()
-    .then(locations => {
-      // console.log('in Actoin', locations)
-      dispatch(setLocations(locations))
-    })
-  }
-}
-
-export const createEvent = (event) => {
-  return dispatch => {
-    Adapters.eventPostFetch(event)
-    .then(ev => {
-      dispatch(eventPost(ev))
-    })
-  }
-}
-
-const eventPost = (event) => {
-  return {
-    type: 'EVENT_POST_FETCH',
-    payload: {
-      event
-    }
   }
 }
 
@@ -129,6 +104,75 @@ export const setCampaign = (campaign) => {
   return dispatch(action)
 }
 }
+// ========================================================
+
+// Character Actions
+
+export const createCharacter = (character) => {
+  return dispatch => {
+    Adapters.characterPostFetch(character)
+    .then(char => {
+      dispatch(setCharacter(char))
+    })
+  }
+}
+
+export const setCharacter = (character) => {
+  // console.log('in setSession', session)
+  return {
+    type: 'LOAD_CHARACTER',
+    payload: {
+      character
+    }
+  }
+}
+// ========================================================
+
+// Location Actions
+
+export const loadLocations = () => {
+  return dispatch => {
+    Adapters.fetchLocations()
+    .then(locations => {
+      // console.log('in Actoin', locations)
+      dispatch(setLocations(locations))
+    })
+  }
+}
+
+const setLocations = (locations) => {
+  // console.log('set location', locations)
+  return {
+    type: 'LOAD_LOCATIONS',
+    payload:{
+      locations
+    }
+  }
+}
+// ========================================================
+
+// Event Actions
+
+export const createEvent = (event) => {
+  return dispatch => {
+    Adapters.eventPostFetch(event)
+    .then(ev => {
+      dispatch(eventPost(ev))
+    })
+  }
+}
+
+const eventPost = (event) => {
+  return {
+    type: 'EVENT_POST_FETCH',
+    payload: {
+      event
+    }
+  }
+}
+// ========================================================
+
+// Chapter Actions
 
 export const createChapter = (chapter, history, url) => {
   return dispatch => {
@@ -158,22 +202,4 @@ export const setChapter = (chapter) => {
     }
   }
 }
-
-const setLocations = (locations) => {
-  // console.log('set location', locations)
-  return {
-    type: 'LOAD_LOCATIONS',
-    payload:{
-      locations
-    }
-  }
-}
-
-const setUser = (user) => {
-  return {
-    type: 'LOAD_USER',
-    payload: {
-      user
-    }
-  }
-}
+// ========================================================

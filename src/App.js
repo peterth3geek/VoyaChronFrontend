@@ -12,12 +12,8 @@ import Landing from './components/landing'
 import CampaignShow from './components/CampaignShow'
 import NavBar from './components/NavBar'
 import './App.css';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import compose from 'recompose/compose'
 import { withTheme } from '@material-ui/core/styles';
-
-// import CircularIndeterminate from './MaterialComponents/CircularIndeterminate'
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -41,7 +37,9 @@ class App extends Component {
         <div>
           {
             this.props.loading ?
-            <CircularProgress className={classes.progress} variant='indeterminate' size={100} color='secondary' />
+            <div style={{position: 'absolute', top: '50%', left: '50%', transform: "translate('-50%', '-50%')"}}>
+              <CircularProgress className={classes.progress} variant='indeterminate' size={100} color='secondary' />
+            </div>
             :
             <Switch>
               <Route exact path='/' render={() => <Redirect to='/home' /> } />
