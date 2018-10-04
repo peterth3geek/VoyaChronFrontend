@@ -42,7 +42,7 @@ class CampaignCard extends React.Component{
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" color='secondary'>Create a {this.props.type}</Button>
+            <Button size="small" color='secondary' onClick={this.props.handleOpen}>Create a {this.props.type}</Button>
           </CardActions>
         </Card>
       </div>

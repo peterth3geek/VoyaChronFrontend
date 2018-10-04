@@ -75,12 +75,12 @@ class CampaignCard extends React.Component{
             <Button size='small' color='secondary'>
               GM: @{campaign.dungeonmaster.username}
             </Button>
-            <IconButton mini>
+            {/* <IconButton mini>
             <EditOutlinedIcon fontSize='small'/>
             </IconButton>
             <IconButton mini>
             <DeleteOutlinedIcon fontSize='small' onClick={() => this.props.deleteCampaign(campaign, this.props.history)}/>
-            </IconButton>
+            </IconButton> */}
           </Typography>
         </CardActions>
       </Card>

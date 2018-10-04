@@ -83,7 +83,7 @@ class CampaignsContainer extends React.Component{
       </GridListTile>)
         })
     } else {
-      return <NoDataCard type='Campaign'/>
+      return <NoDataCard type='Campaign' open={this.state.setOpen} handleOpen={() => this.setState({setOpen: true})} handleClose={this.handleClose}/>
     }
 
   }
