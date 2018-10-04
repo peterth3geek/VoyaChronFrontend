@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -35,23 +36,24 @@ class CharacterCard extends React.Component{
 
   render () {
     // console.log(this.props.campaign)
+    const { character } = this.props
     const { classes } = this.props;
     return (
       <div >
         <Card className={classes.card}>
           <CardActionArea style={{minWidth: 370, maxWidth: '30vw',}}>
             <CardHeader
-              title={this.props.character.name}
+              title={character.name}
               subheader='Dungeons and Dragons Non-Fetched' />
           <CardContent>
             <Typography className={classes.pos} component="p">
-              {this.props.character.biography}
+              {character.biography}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Typography className={classes.pos}>
-            <Button size='small' color='secondary'>Campaign: {this.props.campaign.title}</Button>
+            <Button size='small' color='secondary' onClick={()=>this.props.history.push(`/campaign/${character.campaign.id}`)}>Campaign: {this.props.campaign.title}</Button>
           </Typography>
         </CardActions>
         </Card>
@@ -66,4 +68,4 @@ CharacterCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CharacterCard);
+export default withRouter(withStyles(styles)(CharacterCard));

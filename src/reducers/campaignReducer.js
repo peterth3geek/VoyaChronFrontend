@@ -50,6 +50,13 @@ const campaignReducer = (state = initialState, action) => {
       loading: false
     }
 
+    case "ADD_CAMPAIGN":
+    return{
+      ...state,
+      userCampaigns: [...state.userCampaigns, action.payload.campaign]
+    }
+
+
     case 'EVENT_POST_FETCH':
     // console.log('in campaignReducer action', action.payload)
     return {

@@ -31,7 +31,6 @@ const styles = {
 class CampaignCard extends React.Component{
 
   render () {
-    console.log(this.props.campaign)
     const { classes } = this.props;
     return (
       <div >

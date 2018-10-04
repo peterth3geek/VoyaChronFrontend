@@ -59,6 +59,8 @@ export const createCampaign = (campaign, history, pushURL, user) => {
     .then(camp => {
       dispatch(createCharacter({user_id: user, campaign_id: camp.id, name: 'Dungeonmaster'}))
       dispatch(setCampaign(camp))
+      // dispatch(loadUser())
+      // dispatch(addCampaign(camp))
       history.push(pushURL + camp.id)
     })
 
@@ -100,10 +102,20 @@ export const setCampaign = (campaign) => {
       campaign
     }
   }
-
   return dispatch(action)
 }
 }
+
+// export const addCampaign = (campaign) => {
+//   return dispatch => {
+//     const action ={
+//       type: 'ADD_CAMPAIGN',
+//       payload: {
+//         campaign
+//       }
+//     }
+//   }
+// }
 // ========================================================
 
 // Character Actions

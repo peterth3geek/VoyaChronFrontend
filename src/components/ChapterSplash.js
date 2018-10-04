@@ -25,7 +25,7 @@ class ChapterSplash extends React.Component{
     this.setState({setOpen: false})
   }
 
-  renderChapters = () => {
+  renderSessions = () => {
 
     if(this.props.chapter.story_modules){
       return this.props.chapter.story_modules.map(story =>{
@@ -92,7 +92,7 @@ class ChapterSplash extends React.Component{
       <GridList style={{display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around'}} cols={2}>
-        {this.renderChapters()}
+        {this.renderSessions()}
       </GridList>
       </div>
     </div>

@@ -39,11 +39,11 @@ const styles = {
   },
   pos: {
     marginBottom: 12,
-    overflow: 'hidden',
+    overflow: 'scroll',
     align: 'center',
     minWidth: '370',
     maxWidth: '30vw',
-    height: 145,
+    height: 150,
   },
 };
 

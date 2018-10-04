@@ -141,10 +141,10 @@ class EventTextField extends React.Component{
           InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-          <FormControl required>
-            <InputLabel htmlFor="character">Event As</InputLabel>
+          <FormControl >
+            <InputLabel shrink htmlFor="character">Event As</InputLabel>
             <Select
-              style={{width: '12vw', height: 70}}
+              style={{width: '12vw'}}
               value={this.state.character}
               onChange={this.handleChange}
               input={<Input name='character' id="character" />}

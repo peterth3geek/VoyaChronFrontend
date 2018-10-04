@@ -66,7 +66,7 @@ class CharactersContainer extends React.Component{
           )
         })
     } else {
-      return <NoDataCard type='Character'/>
+      return <NoDataCard type='Character' handleOpen={()=>this.setState({setOpen: true})}/>
     }
   }
 

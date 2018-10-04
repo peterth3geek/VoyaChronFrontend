@@ -81,13 +81,13 @@ class ChapterCard extends React.Component{
       <Card className={classes.card}>
       <CardActionArea onClick={this.chapterClick} style={{minWidth: 400, maxWidth: '30vw',}}>
         <CardHeader title={chapter.title} titleTypographyProps={{variant: 'display1', backgroundColor: 'primary', color: 'textPrimary'}}/>
-          <CardContent >
+          <CardContent>
             <Typography className={classes.pos} component="p">
               {chapter.description}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardContent style={{overflow: 'scroll'}}>
+        <CardContent >
           <Typography variant='title'>
             Sessions
           </Typography>
