@@ -75,7 +75,7 @@ class SessionForm extends React.Component{
       <div>
         <Dialog
           open={this.props.open}
-          onClose={this.createSession}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">New Session</DialogTitle>

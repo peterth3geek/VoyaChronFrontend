@@ -63,11 +63,13 @@ class CampaignForm extends React.Component{
     }
 
   render () {
+    // onClose={this.createCampaign}
+
     return (
       <div>
         <Dialog
           open={this.props.open}
-          onClose={this.createCampaign}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">New Campaign</DialogTitle>

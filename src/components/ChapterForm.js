@@ -59,11 +59,12 @@ class ChapterForm extends React.Component{
     }
 
   render () {
+    // onClose={this.createChapter}
     return (
       <div>
         <Dialog
           open={this.props.open}
-          onClose={this.createChapter}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">New Chapter</DialogTitle>

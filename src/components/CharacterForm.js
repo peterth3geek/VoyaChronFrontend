@@ -63,11 +63,11 @@ class CharacterForm extends React.Component{
     }
 
   render () {
+    // onClose={this.createCharacter}
     return (
       <div>
         <Dialog
           open={this.props.open}
-          onClose={this.createCharacter}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">New Character</DialogTitle>
