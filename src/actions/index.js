@@ -9,6 +9,15 @@ export const loadUser = () => {
   }
 }
 
+export const getUserByUsername = (user, history) => {
+  return (dispatch) => {
+    Adapters.getUserByName(user).then(usr =>{
+      dispatch(setUser(usr))
+      history.push('/home')
+    })
+  }
+}
+
 const setUser = (user) => {
   return {
     type: 'LOAD_USER',
@@ -57,11 +66,16 @@ export const createCampaign = (campaign, history, pushURL, user) => {
   return dispatch => {
     Adapters.campaignPostFetch(campaign)
     .then(camp => {
-      dispatch(createCharacter({user_id: user, campaign_id: camp.id, name: 'Dungeonmaster'}))
-      dispatch(setCampaign(camp))
-      // dispatch(loadUser())
-      // dispatch(addCampaign(camp))
-      history.push(pushURL + camp.id)
+      Adapters.characterPostFetch({user_id: user, campaign_id: camp.id, name: 'Dungeonmaster'})
+      .then(character =>{
+        // debugger
+        const campaign1 = {
+          ...camp,
+          characters: [character]
+        }
+        dispatch(setCampaign(campaign1))
+        history.push(pushURL + camp.id)
+      })
     })
 
   }
@@ -94,15 +108,20 @@ export const prepLoadCampaign = () => {
 }
 
 export const setCampaign = (campaign) => {
-  return dispatch => {
-    console.log('REDUCING', campaign)
-  const action = {
+  return {
     type: 'LOAD_CAMPAIGN',
     payload: {
       campaign
     }
-  }
-  return dispatch(action)
+}
+}
+
+export const setCurrentCampaign = (campaign) => {
+  return {
+    type: 'SET_CAMPAIGN',
+    payload: {
+      campaign
+    }
 }
 }
 
@@ -128,6 +147,7 @@ export const createCharacter = (character) => {
     })
   }
 }
+
 
 export const setCharacter = (character) => {
   // console.log('in setSession', session)

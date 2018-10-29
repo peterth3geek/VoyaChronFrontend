@@ -11,6 +11,8 @@ import {Route, Switch, Redirect, withRouter} from 'react-router-dom'
 import Landing from './components/landing'
 import CampaignShow from './components/CampaignShow'
 import NavBar from './components/NavBar'
+import FauxLogin from './components/FauxLogin'
+
 import './App.css';
 import compose from 'recompose/compose'
 import { withTheme } from '@material-ui/core/styles';
@@ -45,9 +47,11 @@ class App extends Component {
               <Route exact path='/' render={() => <Redirect to='/home' /> } />
               <Route exact path='/home' render={() => <Landing/> }/>
               <Route path='/campaign/:slug' render={(props) => <CampaignShow {...props} />}/>
-              <Route render={() => <Redirect to='/home' />}/>
+              <Route render={() => <Redirect to='/' />}/>
             </Switch>
           }
+
+
         </div>
       </div>
     );

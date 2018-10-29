@@ -43,7 +43,7 @@ class EventTextField extends React.Component{
 
   state = {
     description: '',
-    character: null,
+    character: this.props.campaign.dungeonmaster.id,
   }
 
   eventText = (e) => {
@@ -91,10 +91,10 @@ class EventTextField extends React.Component{
 
     if(eventKey === 'Enter'){
       e.preventDefault()
-      console.log(this.state.character)
+      // console.log(this.state.character)
 
       if(description === "" || this.state.character === null){
-        console.log(`BAD REQUEST! BAD`)
+        // console.log(`BAD REQUEST! BAD`)
       } else {
         const event ={
           character_id,
@@ -120,11 +120,12 @@ class EventTextField extends React.Component{
   render () {
 
     const characters = this.props.campaign.characters.filter(character => {
+      // debugger
       return character.campaign.id === this.props.campaign.id
     })
-    console.log('state', this.state, 'dm', this.props.campaign.characters.filter(character => {
-      return character.name === 'Dungeonmaster'
-    }))
+    // console.log('state', this.state, 'dm', this.props.campaign.characters.filter(character => {
+      // return character.name === 'Dungeonmaster'
+    // }))
     return (
       <div>
         <TextField
@@ -174,7 +175,7 @@ class EventTextField extends React.Component{
 const mapStateToProps = (state) => {
   return {
     characters: state.initReducer.userCharacters,
-    // campaign: state.campaignReducer.currentCampaign
+    campaign: state.campaignReducer.currentCampaign
   }
 }
 

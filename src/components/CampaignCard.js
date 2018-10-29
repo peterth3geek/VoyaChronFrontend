@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { setCampaign, deleteCampaign } from '../actions'
+import { setCurrentCampaign, deleteCampaign } from '../actions'
 
 
 import Card from '@material-ui/core/Card';
@@ -52,7 +52,7 @@ class CampaignCard extends React.Component{
 
   campaignClick = (e) => {
     const { campaign } = this.props;
-    this.props.setCampaign(campaign)
+    this.props.setCurrentCampaign(campaign)
     this.props.history.push(`/campaign/${campaign.id}`)
   }
 
@@ -104,7 +104,15 @@ CampaignCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  // console.log('in map state to props', state)
+  return{
+    currentUser: state.initReducer.currentUser,
+    // campaign: state.campaignReducer.currentCampaign
+  }
+}
+
 export default withRouter(
   compose(
-    connect(null, { setCampaign, deleteCampaign }),
+    connect(mapStateToProps, { setCurrentCampaign, deleteCampaign }),
   withStyles(styles))(CampaignCard));

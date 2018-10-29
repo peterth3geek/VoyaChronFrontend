@@ -1,6 +1,6 @@
 const initialState = {
   loading: true,
-  currentUser: {},
+  currentUser: {campaigns: []},
   userCampaigns: [],
   userCharacters: [],
   userEvents: [],
@@ -22,4 +22,4 @@ const userReducer = (state = initialState, action) => {
   }
 }
 
-export default initReducer
+export default userReducer

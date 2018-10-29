@@ -29,6 +29,19 @@ const initReducer = (state = initialState, action) => {
       userCharacters: [...state.userCharacters, action.payload.character]
     }
 
+    // case'LOAD_CAMPAIGN':
+    // console.log('user reducer', action.payload.campaign, 'user', state.currentUser)
+    // return{
+    //   ...state,
+    //   currentUser: {
+    //     ...state.currentUser,
+    //     campaigns: [
+    //       ...state.currentUser.campaigns,
+    //       action.payload.campaign
+    //     ]
+    //   }
+    // }
+
     default:
     return state
   }

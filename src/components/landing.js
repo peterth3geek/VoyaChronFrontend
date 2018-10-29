@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
+
 
 import CampaignsContainer from './CampaignsContainer'
 import CharactersContainer from './CharactersContainer'
@@ -32,7 +34,7 @@ class Landing extends React.Component{
 
   componentDidMount(){
     this.setState({loading: false})
-    this.props.setCampaign({characters: [], chapters: [], dungeonmaster: {username: null}})
+    // this.props.setCampaign({characters: [], chapters: [], dungeonmaster: {username: null}})
   }
 
   render () {
@@ -53,7 +55,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default compose(
+export default withRouter(compose(
   connect(mapStateToProps, { setCampaign }),
   withTheme()
-)(Landing)
+)(Landing))

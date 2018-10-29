@@ -7,7 +7,7 @@ import App from './App';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 
@@ -15,8 +15,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 import thunk from 'redux-thunk'
-
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 const store = createStore(rootReducer, applyMiddleware(thunk))
+
 
 const theme = createMuiTheme({
   palette: {

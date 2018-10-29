@@ -9,7 +9,7 @@ const characterURL = 'http://localhost:3000/characters'
 
 // GET REQUESTS
 
-export const fetchUser = (userID = 3) => {
+export const fetchUser = (userID = 2) => {
   return fetch(`${userURL}/${userID}`)
   .then(r=>r.json())
 }
@@ -25,7 +25,7 @@ export const fetchSession = (sessionID) => {
 }
 
 export const fetchLocations = () => {
-  return fetch(`${locationURL}`)
+  return fetch(locationURL)
   .then(r=>r.json())
 }
 
@@ -87,6 +87,17 @@ export const characterPostFetch = (character) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(character)
+  }
+).then(r=>r.json())
+}
+
+export const getUserByName = (username) => {
+  return fetch(userURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(username)
   }
 ).then(r=>r.json())
 }

@@ -24,7 +24,7 @@ class ChapterSplash extends React.Component{
     if(this.props.campaign.chapters){
       return this.props.campaign.chapters.map(c =>{
         console.log(c);
-      return <ChapterCard campaign={this.props.campaign} chapter={c}/>
+      return <ChapterCard chapter={c}/>
       })
     }
   }
@@ -34,6 +34,7 @@ class ChapterSplash extends React.Component{
   }
 
   render () {
+    console.log('campaign splash render', this.props.campaign)
     return (
       <div>
         <ChapterForm open={this.state.setOpen} campaign={this.props.campaign} handleClose={this.handleClose}/>
@@ -68,7 +69,7 @@ const mapStateToProps = (state) => {
   // console.log('in map state to props', state)
   return{
     currentUser: state.initReducer.currentUser,
-    currentCampaign: state.campaignReducer.currentCampaign
+    campaign: state.campaignReducer.currentCampaign
   }
 }
 

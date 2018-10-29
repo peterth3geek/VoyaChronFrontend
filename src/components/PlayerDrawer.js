@@ -111,7 +111,9 @@ if(formData !== '') {
   }
 
 
+
   render() {
+    console.log(this.props.campaign)
     const { classes } = this.props;
 
     return (

@@ -68,6 +68,7 @@ class ChapterCard extends React.Component{
     const { chapter } = this.props;
     const { campaign } = this.props;
 
+    console.log('chapter', chapter, 'campaign', campaign, 'story', storyID)
     this.props.loadSession(storyID)
     this.props.history.push(`/campaign/${campaign.id}/${chapter.id}/${storyID}`)
 
@@ -127,6 +128,14 @@ class ChapterCard extends React.Component{
   }
 }
 
+const mapStateToProps = (state) => {
+  // console.log('in map state to props', state)
+  return{
+    currentUser: state.initReducer.currentUser,
+    campaign: state.campaignReducer.currentCampaign
+  }
+}
+
 
 ChapterCard.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -134,5 +143,5 @@ ChapterCard.propTypes = {
 
 export default withRouter(
   compose(
-    connect(null, { setChapter, loadSession }),
+    connect(mapStateToProps, { setChapter, loadSession }),
     withStyles(styles), withTheme())(ChapterCard));

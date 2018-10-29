@@ -50,6 +50,25 @@ const campaignReducer = (state = initialState, action) => {
       loading: false
     }
 
+    case'SET_CAMPAIGN':
+    const eventArray2 = []
+    if(!!action.payload.campaign.characters){
+      action.payload.campaign.characters.map(character => {
+        if(!!character.events){
+          character.events.map(event => {
+            eventArray2.push(event)
+          })
+        }
+      })
+    }
+
+    return {
+      ...state,
+      currentCampaign: action.payload.campaign,
+      campaignEvents: eventArray2,
+      loading: false
+    }
+
     case "ADD_CAMPAIGN":
     return{
       ...state,

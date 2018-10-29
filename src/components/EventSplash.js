@@ -58,7 +58,7 @@ class EventSplash extends React.Component{
 
     // console.log('map', session)
     const newArr = eventArray.sort((a, b) =>{
-      return b.id - a.id
+      return a.id - b.id
     })
 
     return newArr.map(event =>{
@@ -112,7 +112,7 @@ class EventSplash extends React.Component{
             {this.mapEvents()}
         </div>
         <div>
-          <EventTextField sessionID={this.props.session} campaign={this.props.campaign} user={this.props.currentUser}/>
+          <EventTextField sessionID={this.props.session} user={this.props.currentUser}/>
         </div>
       </div>
       {/* <div>

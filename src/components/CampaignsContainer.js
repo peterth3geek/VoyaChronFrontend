@@ -101,7 +101,7 @@ class CampaignsContainer extends React.Component{
       alignItems: 'center',
     }
 
-    // console.log()
+    console.log('campaign container', this.props.campaigns)
 
     return (
       <div className={classes.card}>
@@ -125,6 +125,7 @@ class CampaignsContainer extends React.Component{
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.initReducer.currentUser.campaigns)
   return{
     campaigns: [...state.initReducer.currentUser.campaigns],
   }
