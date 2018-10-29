@@ -41,7 +41,7 @@ class SessionForm extends React.Component{
     }))
   }
 
-    createSession = () => {
+    makeSession = () => {
       const { title } = this.state
       const { description } = this.state
       const location_id = this.state.sessionLocation
@@ -124,7 +124,7 @@ class SessionForm extends React.Component{
             <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.createSession} color="primary">
+            <Button onClick={this.makeSession} color="primary">
               Create
             </Button>
           </DialogActions>

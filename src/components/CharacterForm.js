@@ -41,7 +41,7 @@ class CharacterForm extends React.Component{
     }))
   }
 
-    createCharacter = () => {
+    makeCharacter = () => {
       const { name, biography, campaign_id, npc, notes } = this.state
 
       const user_id = this.props.user.id
@@ -124,7 +124,7 @@ class CharacterForm extends React.Component{
             <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.createCharacter} color="primary">
+            <Button onClick={this.makeCharacter} color="primary">
               Create
             </Button>
           </DialogActions>

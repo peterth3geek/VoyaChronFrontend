@@ -34,7 +34,7 @@ class ChapterForm extends React.Component{
     }))
   }
 
-    createChapter = () => {
+    makeChapter = () => {
       const { title } = this.state
       const { description } = this.state
 
@@ -113,7 +113,7 @@ class ChapterForm extends React.Component{
             <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.createChapter} color="primary">
+            <Button onClick={this.makeChapter} color="primary">
               Create
             </Button>
           </DialogActions>

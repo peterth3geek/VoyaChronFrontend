@@ -34,7 +34,7 @@ class CampaignForm extends React.Component{
     }))
   }
 
-    createCampaign = () => {
+    makeCampaign = () => {
       const { title } = this.state
       const { description } = this.state
 
@@ -119,7 +119,7 @@ class CampaignForm extends React.Component{
             <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.createCampaign} color="primary">
+            <Button onClick={this.makeCampaign} color="primary">
               Create
             </Button>
           </DialogActions>
