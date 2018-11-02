@@ -12,10 +12,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 
-import { createEvent } from '../actions'
+import { createEvent } from '../../actions'
 
 import PlayerDrawerCard from './PlayerDrawerCard'
-import CharacterForm from './CharacterForm'
+import CharacterForm from '../Character/CharacterForm'
 
 
 const styles = theme => ({

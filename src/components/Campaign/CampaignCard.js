@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { setCurrentCampaign, deleteCampaign } from '../actions'
+import { setCurrentCampaign, deleteCampaign } from '../../actions'
 
 
 import Card from '@material-ui/core/Card';

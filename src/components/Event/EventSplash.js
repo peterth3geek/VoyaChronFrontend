@@ -12,7 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 
-import { createEvent, loadSession, setSession, loadChapter, setChapter, setCampaign } from '../actions'
+import { createEvent, loadSession, setSession, loadChapter, setChapter, setCampaign } from '../../actions'
 
 import EventTextField from './EventTextField'
 import EventCard from './EventCard'

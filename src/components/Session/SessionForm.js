@@ -1,13 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
+
+// import compose from 'recompose/compose'
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { createCampaign, createCharacter } from '../actions';
+
+import { createSession } from '../../actions';
+
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,7 +22,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-class CampaignForm extends React.Component{
+class SessionForm extends React.Component{
 
   state = {
     title: '',
@@ -34,37 +41,36 @@ class CampaignForm extends React.Component{
     }))
   }
 
-    makeCampaign = () => {
+    makeSession = () => {
       const { title } = this.state
       const { description } = this.state
+      const location_id = this.state.sessionLocation
+      const chapter_id = this.props.currentChapter.id
 
-      const dm_id = this.props.currentUser.id
-      const game_id = 1
+      const campaign = this.props
+      const chapter = this.props
 
-      const campaign = {
+      const session = {
         title,
         description,
-        dm_id,
-        game_id,
+        location_id,
+        chapter_id
       }
+      console.log('session object', session)
 
-
-      const currentUser = this.props.currentUser.id
-      const pushURL = `/campaign/`
       const history = this.props.history
+      const url = `/campaign/${this.props.currentCampaign.id}/${chapter_id}/`
 
-      console.log('campaign object', campaign, history, pushURL, currentUser)
-      // console.log('character object', character)
-      // this.props.createCharacter(character)
-      this.props.createCampaign(campaign, history, pushURL, currentUser)
+      this.props.createSession(session, history, url)
       this.props.handleClose()
-      // // return <Redirect to={`/campaign/${this.props.currentCampaign.id}/${campaign_id}/${newCampaign.id}`} />
-      // this.props.history.push(`/campaign/${this.props.currentCampaign.id}/${newCampaign.id}`)
+      const newSession = this.props.session
+      console.log('newSession', newSession)
+      //
+      // // return <Redirect to={`/campaign/${this.props.currentCampaign.id}/${chapter_id}/${newSession.id}`} />
+      // this.props.history.push(`/campaign/${this.props.currentCampaign.id}/${chapter_id}/${newSession.id}`)
     }
 
   render () {
-    // onClose={this.createCampaign}
-
     return (
       <div>
         <Dialog
@@ -72,7 +78,7 @@ class CampaignForm extends React.Component{
           onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Campaign</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Session</DialogTitle>
           <DialogContent>
             <form>
             <TextField
@@ -95,31 +101,30 @@ class CampaignForm extends React.Component{
               value={this.state.description}
               fullWidth
             />
-            {/* <FormControl>
-              EVENTUALLY, this can be resurrected as a game selection dropdown.
-              <InputLabel>{this.state.location.title}</InputLabel>
+            <FormControl>
+              {/* <InputLabel>{this.state.location.title}</InputLabel> */}
               <InputLabel htmlFor="sessionLocation">Location</InputLabel>
 
-               <Select
+              <Select
                 value={this.state.sessionLocation}
                 onChange={this.handleChange}
                 input={<Input name='sessionLocation' id="sessionLocation" />}
               >
                 {this.props.locations.map(location => {
                   const name = location.title
-                  return <MenuItem value={location.id}>{name}</MenuItem>
+                  return <MenuItem key={location.title} value={location.id}>{name}</MenuItem>
                 })}
 
               </Select>
               <FormHelperText>Some super important helper text that apparently dictates the length of the field</FormHelperText>
-            </FormControl> */}
+            </FormControl>
           </form>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.makeCampaign} color="primary">
+            <Button onClick={this.makeSession} color="primary">
               Create
             </Button>
           </DialogActions>
@@ -132,8 +137,11 @@ class CampaignForm extends React.Component{
 const mapStateToProps = (state) => {
   return{
     currentUser: state.initReducer.currentUser,
-    campaign: state.campaignReducer.currentCampaign,
+    currentChapter: state.campaignReducer.currentChapter,
+    currentCampaign: state.campaignReducer.currentCampaign,
+    locations: state.campaignReducer.locations,
+    session: state.campaignReducer.currentSession
   }
 }
 
-export default withRouter(connect(mapStateToProps, { createCampaign, createCharacter })(CampaignForm))
+export default withRouter(connect(mapStateToProps, { createSession })(SessionForm))

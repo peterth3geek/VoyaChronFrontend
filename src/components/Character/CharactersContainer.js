@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import CharacterCard from './CharacterCard'
-import NoDataCard from './NoDataCard'
+import NoDataCard from '../NoDataCard'
 import CharacterForm from './CharacterForm'
 
 

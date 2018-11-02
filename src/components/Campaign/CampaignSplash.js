@@ -2,16 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import compose from 'recompose/compose'
+
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
-import ChapterCard from './ChapterCard';
 import Button from '@material-ui/core/Button';
-import ChapterForm from './ChapterForm'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+
+import ChapterCard from '../Chapter/ChapterCard';
+import ChapterForm from '../Chapter/ChapterForm'
 
 
 class ChapterSplash extends React.Component{

@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import { withRouter, Switch, Route } from 'react-router-dom'
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { loadCampaign } from '../actions'
+
 import compose from 'recompose/compose'
 
-import EventSplash from './EventSplash'
-import CampaignSplash from './CampaignSplash'
-import ChapterSplash from './ChapterSplash'
-import PlayerDrawer from './PlayerDrawer'
+import { loadCampaign } from '../../actions'
+
+import EventSplash from '../Event/EventSplash'
+import CampaignSplash from '../Campaign/CampaignSplash'
+import ChapterSplash from '../Chapter/ChapterSplash'
+import PlayerDrawer from '../Player/PlayerDrawer'
 
 const styles = theme => ({
   root: {

@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-import { setChapter, loadChapter } from '../actions'
+import { setChapter, loadChapter } from '../../actions'
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';

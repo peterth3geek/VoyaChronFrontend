@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Route, Switch, Redirect, withRouter} from 'react-router-dom'
 
 import Landing from './components/landing'
-import CampaignShow from './components/CampaignShow'
+import CampaignShow from './components/Campaign/CampaignShow'
 import NavBar from './components/NavBar'
 import FauxLogin from './components/FauxLogin'
 

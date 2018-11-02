@@ -1,18 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import compose from 'recompose/compose'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import compose from 'recompose/compose';
+
 import { withStyles } from '@material-ui/core/styles';
 import { withTheme } from '@material-ui/core/styles';
-import { setChapter, setCampaign, loadChapter, loadLocations } from '../actions'
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import Button from '@material-ui/core/Button';
-import SessionCard from './SessionCard';
-import SessionForm from './SessionForm'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+
+import { setChapter, setCampaign, loadChapter, loadLocations } from '../../actions';
+import SessionCard from '../Session/SessionCard';
+import SessionForm from '../Session/SessionForm';
 
 
 class ChapterSplash extends React.Component{

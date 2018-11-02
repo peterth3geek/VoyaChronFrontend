@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 
-import CampaignsContainer from './CampaignsContainer'
-import CharactersContainer from './CharactersContainer'
-import EventsContainer from './EventsContainer'
+import CampaignsContainer from './Campaign/CampaignsContainer'
+import CharactersContainer from './Character/CharactersContainer'
+import EventsContainer from './Event/EventsContainer'
 
 import { setCampaign } from '../actions'
 

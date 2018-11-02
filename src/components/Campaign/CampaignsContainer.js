@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import CampaignCard from './CampaignCard'
-import NoDataCard from './NoDataCard'
+import NoDataCard from '../NoDataCard'
 import CampaignForm from './CampaignForm'
 
 import GridList from '@material-ui/core/GridList';
