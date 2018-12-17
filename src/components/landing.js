@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom'
 import CampaignsContainer from './Campaign/CampaignsContainer'
 import CharactersContainer from './Character/CharactersContainer'
 import EventsContainer from './Event/EventsContainer'
+// import FauxLogin from './FauxLogin'
 
 import { setCampaign } from '../actions'
 
@@ -49,6 +50,7 @@ class Landing extends React.Component{
 }
 
 const mapStateToProps = (state) => {
+  // console.log(state)
   return{
     currentUser: state.initReducer.currentUser,
     // campaignTheme: state.campaignTheme

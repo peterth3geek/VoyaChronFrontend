@@ -9,8 +9,8 @@ const characterURL = 'http://localhost:3000/characters'
 
 // GET REQUESTS
 
-export const fetchUser = (userID = 2) => {
-  return fetch(`${userURL}/${userID}`)
+export const fetchUser = (userID) => {
+  return fetch(`${userURL}/1`)
   .then(r=>r.json())
 }
 

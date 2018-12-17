@@ -31,6 +31,8 @@ class FauxLogin extends React.Component{
 
      const history = this.props.history
 
+     history.push(`VOYACHRON`)
+
     this.props.getUserByUsername(user, history)
     console.log(history)
   }

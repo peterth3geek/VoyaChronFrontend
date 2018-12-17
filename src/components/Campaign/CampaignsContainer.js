@@ -125,9 +125,10 @@ class CampaignsContainer extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.initReducer.currentUser.campaigns)
+  console.log(state)
   return{
-    campaigns: [...state.initReducer.currentUser.campaigns],
+    currentUser: state.initReducer.currentUser,
+    campaigns: [...state.initReducer.currentUser.user.campaigns],
   }
 }
 
@@ -136,4 +137,7 @@ CampaignsContainer.propTypes = {
 };
 
 
-export default compose(withStyles(styles), connect(mapStateToProps))(CampaignsContainer)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps))
+  (CampaignsContainer)

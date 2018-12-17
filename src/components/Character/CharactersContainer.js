@@ -104,7 +104,7 @@ class CharactersContainer extends React.Component{
 
 const mapStateToProps = (state) => {
   return{
-    characters: state.initReducer.currentUser.characters
+    characters: state.initReducer.currentUser.user.characters
   }
 }
 

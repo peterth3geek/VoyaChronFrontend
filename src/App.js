@@ -45,7 +45,7 @@ class App extends Component {
             :
             <Switch>
               <Route exact path='/' render={() => <Redirect to='/home' /> } />
-              <Route exact path='/home' render={() => <Landing/> }/>
+              <Route exact path='/home' render={() => <Landing />} />
               <Route path='/campaign/:slug' render={(props) => <CampaignShow {...props} />}/>
               <Route render={() => <Redirect to='/' />}/>
             </Switch>

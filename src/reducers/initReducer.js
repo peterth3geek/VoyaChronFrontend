@@ -1,7 +1,7 @@
 
 const initialState = {
   loading: true,
-  currentUser: {},
+  currentUser: {username: '', campaigns: []},
   currentChapter: {},
   currentCampaign: {},
   userCampaigns: [],

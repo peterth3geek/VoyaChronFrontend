@@ -66,6 +66,7 @@ class NavBar extends React.Component{
 
 
 const mapStateToProps = (state) => {
+  console.log(state.initReducer.currentUser)
   return {
     currentUser: state.initReducer.currentUser
   }

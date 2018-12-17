@@ -4,7 +4,7 @@ import * as Adapters from '../adapters'
 export const loadUser = () => {
   return (dispatch) => {
     Adapters.fetchUser().then(user => {
-      dispatch(setUser(user))
+      dispatch(setUser({user}))
     })
   }
 }
@@ -19,6 +19,7 @@ export const getUserByUsername = (user, history) => {
 }
 
 const setUser = (user) => {
+  // console.log(user)
   return {
     type: 'LOAD_USER',
     payload: {
