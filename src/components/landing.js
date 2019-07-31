@@ -58,6 +58,5 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(compose(
-  connect(mapStateToProps, { setCampaign }),
-  withTheme()
+  connect(mapStateToProps, { setCampaign })
 )(Landing))

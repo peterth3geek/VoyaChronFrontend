@@ -154,4 +154,4 @@ const mapStateToProps = (state) => {
 export default withRouter(compose(
   connect(mapStateToProps, { createEvent }),
   withStyles(styles),
-  withTheme())(PlayerDrawer));
+  )(PlayerDrawer));

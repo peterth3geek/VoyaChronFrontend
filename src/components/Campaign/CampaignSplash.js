@@ -77,7 +77,6 @@ const mapStateToProps = (state) => {
 
 export default  withRouter(compose(
   connect(mapStateToProps),
-  withTheme(),
   )(ChapterSplash))
 
   // withStyles(styles)

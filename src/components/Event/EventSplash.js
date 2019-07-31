@@ -136,5 +136,4 @@ const mapStateToProps = (state) => {
 
 export default withRouter(compose(
   connect(mapStateToProps, { createEvent, loadSession, setSession, loadChapter, setChapter, setCampaign }),
-  withTheme(),
   withStyles(styles))(EventSplash))

@@ -144,4 +144,4 @@ ChapterCard.propTypes = {
 export default withRouter(
   compose(
     connect(mapStateToProps, { setChapter, loadSession }),
-    withStyles(styles), withTheme())(ChapterCard));
+    withStyles(styles), )(ChapterCard));

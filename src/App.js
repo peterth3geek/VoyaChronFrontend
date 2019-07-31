@@ -67,6 +67,5 @@ const mapStateToProps = (state) => {
 
 export default withRouter(compose(
   connect(mapStateToProps, { loadUser }),
-  withStyles(styles),
-  withTheme()
+  withStyles(styles)
 )(App));

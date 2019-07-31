@@ -114,6 +114,5 @@ const mapStateToProps = (state) => {
 }
 
 export default  withRouter(compose(
-  connect(mapStateToProps, { setChapter, loadChapter, setCampaign, loadLocations }),
-  withTheme(),
+  connect(mapStateToProps, { setChapter, loadChapter, setCampaign, loadLocations })
 )(ChapterSplash))
